@@ -1,0 +1,127 @@
+body {
+	&.primary_color1 {
+		.site-header .header-top.layout2 .header-top-wrap .header-top-left .widget div.textwidget .icon-header, .site-header.header-layout2 .header-main .header-navigation .main-navigation .menu-main-menu li.current-menu-ancestor > a, .site-header.header-layout2 .header-main .header-navigation .main-navigation .menu-main-menu li .current-menu-item > a, .site-header.header-layout2 .header-main .header-main-wrap .header-main-right .widget .header-block .block-content a, .team-position, .team-contact li span.title, .site-content ul.case-list li i, .cms-pricing-table.style2 .pricing-icon, .site-footer .info-box ul li span.icon-left, .site-footer.layout2 .footer-top .widget.widget_cs_recent_post_v2 .entry-main .title-recent:before, .footer-bottom a, .cms-testimonial .testimonial .testi-wrap .testi-content .testi-position, .cms-pricing-table.style2 ul.features-list li i, .site-header .header-top.layout2 .header-top-wrap .header-top-left .widget .textwidget > div .icon-header,.site-header.header-layout3 .header-main .menu-main-menu li.current-menu-ancestor > a, .site-header.header-layout3 .header-main .menu-main-menu li .current-menu-item > a, .cms-grid-service-2 .cms-grid-service .item-content ul.service-list, .entry-meta ul li,.site-footer.layout1 .footer-top .contact-info-box .hours li span,.zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a.active, .zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a:hover, .template-cms_grid--blog2 .blog-wrap .entry-footer a:hover, .template-cms_grid--blog2 .blog-wrap .entry-footer a:focus, .promo-video a i, .cms-grid-service-2 .cms-grid-service .item-content ul.service-list li:before, .site-header.header-layout2 .header-main .header-navigation .main-navigation .menu-main-menu > li > a:hover, .site-header.header-layout2 .header-main .header-navigation .main-navigation .menu-main-menu > li > a:focus, .site-header .menu-main-menu > li > ul.sub-menu > li li a:hover, .site-header .menu-main-menu > li > ul.sub-menu > li li a:focus, h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, .template-cms_grid--blog2 .blog-wrap .blog-content .entry-header .entry-category a:hover, .template-cms_grid--blog2 .blog-wrap .blog-content .entry-header .entry-category a:focus, .acumec-blog .entry-header .entry-title a:hover, .acumec-blog .entry-header .entry-title a:focus, .site-footer.layout2 .footer-top a:hover, .site-footer.layout2 .footer-top a:focus, .zo-masonry-wrapper .zo-masonry .zo-masonry-item .cms-grid-inner .item-content .taxs a:hover, .zo-masonry-wrapper .zo-masonry .zo-masonry-item .cms-grid-inner .item-content .taxs a:focus, .site-header .widget_cart_search_wrap .header-search-cart > a:hover, .site-header .widget_cart_search_wrap .header-search-cart > a:focus, .site-header .header-middle .header-middle-wrap .header-middle-right .textwidget.custom-html-widget .block-left .icon-header, .site-header.header-default .header-main .menu-main-menu > li > a:hover, .site-header.header-default .header-main .menu-main-menu > li > a:focus, .site-header.header-default .header-main .menu-main-menu li.current-menu-ancestor > a, .site-header.header-default .header-main .menu-main-menu li.current-menu-item > a, .site-header.header-default .header-main .menu-main-menu li.current-menu-ancestor > a, .site-header.header-default .header-main .menu-main-menu li.current-menu-item > a, .site-header .menu-main-menu ul.sub-menu .current-menu-item > a, .site-header .menu-main-menu ul.sub-menu .current-menu-parent > a, .site-header .menu-main-menu ul.sub-menu .current_page_item > a, .site-header .menu-main-menu > li > ul.sub-menu > li li a:hover, .site-header .menu-main-menu > li > ul.sub-menu > li li a:focus, .cms-blog-carousel .carousel-item .blog-wrap .blog-content > div.blog-content-wrap ul.meta-list li a, .site-footer.layout1 .footer-top a:hover, .site-footer.layout1 .footer-top a:focus, .site-header .header-top.layout2 .widget_cms_socials_widget ul li a:hover, .site-header .header-top.layout2 .widget_cms_socials_widget ul li a:focus, .promo-video p, .site-header.header-layout3 .menu-main-menu > li > a:hover, .site-header.header-layout3 .menu-main-menu > li > a:focus, .widget_authenticate .fs-body .form a:hover, .widget_authenticate .fs-body .form a:focus {
+			color: $primary_color1;	
+		}
+		.zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a.active, .zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a:hover, .zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a:focus {
+			color: $primary_color1 !important;	
+		}
+		.btn-theme-primary,.site-header .widget_cart_search_wrap .widget_searchform_content .cshero-dropdown-search .theme_button, .rev_slider .contact-form.contact-service input.btn, .rev_slider .contact-form.contact-service textarea.btn, .contact-form.contact2 .btn-send input[type='submit'], .ef3-back-to-top, .btn-loadmore, .cms-pricing-table.style2.active, .promo-video a span, .site-content .owl-next, .site-content .owl-prev {
+			background: $primary_color1;
+			&:hover, &:focus {
+				background: $button_primary_bg_hover;
+			}
+		}
+		.footer-bottom .widget.widget_cms_socials_widget ul li a:hover, .footer-bottom .widget.widget_cms_socials_widget ul li a:focus, .cms-grid-service-2 .cms-grid-service .item-content ul.service-list li:before, .site-header.header-default .header-main .header-main-right, .cms-blog-carousel .carousel-item .blog-wrap .blog-content > div.blog-date a {
+			background: $primary_color1;
+		}
+		.cms-grid-team-2 .cms-grid-item-wrap .item-content .team-social li a:hover, .cms-grid-team-2 .cms-grid-item-wrap .item-content .team-social li a:focus, .zo-masonry-wrapper .zo-masonry .zo-masonry-item .cms-grid-inner .item-content .grid-link a:hover, .zo-masonry-wrapper .zo-masonry .zo-masonry-item .cms-grid-inner .item-content .grid-link a:focus {
+			background: $primary_color1 !important;
+		}
+		.cms-blog-carousel.cms-carousel .owl-nav .owl-prev:before, .cms-blog-carousel.cms-carousel .owl-nav .owl-next:before {
+			background: $primary_color1_overlay2;
+		}
+		.cms-pricing-table.style2.active .pricing-icon, .cms-pricing-table.style2.active .title h3, .cms-pricing-table.style2.active .pricing, .cms-pricing-table.style2.active .pricing .sub_pricing, .cms-pricing-table.style2.active .description, .cms-pricing-table.style2.active ul.features-list li, .cms-pricing-table.style2.active ul.features-list li i {
+			color: #fff;
+		}
+		@media (min-width: 1200px) {
+			.site-content .template-cms_grid .cms-grid-item .blog-wrap .blog-content .blog-date span.archive-day {
+				color: $primary_color1;
+			}
+		}
+		@media (max-width: 1199px) {
+			.site-header.header-layout2 .navbar-toggle .icon-bar, .site-header.header-default .navbar-toggle .icon-bar, .navbar-toggle:hover .icon-bar, .navbar-toggle:focus .icon-bar  {
+				background: $primary_color1;
+			}
+			.header-navigation .main-navigation .menu-main-menu > ul > li .cs-menu-toggle:hover, .header-navigation .main-navigation .menu-main-menu > li .cs-menu-toggle:hover, .site-header .header-main .header-navigation .main-navigation .menu-main-menu li a:hover, .site-header .header-main .header-navigation .main-navigation .menu-main-menu li a:focus, .site-header .header-main .header-navigation .main-navigation > div > ul > li.current-menu-ancestor > a, .site-header .header-main .header-navigation .main-navigation ul.nav-menu > li.current-menu-ancestor > a, .site-header .header-main .header-navigation .main-navigation > div > ul > li.current-menu-parent > a, .site-header .header-main .header-navigation .main-navigation ul.nav-menu > li.current-menu-parent > a, .site-header .header-main .header-navigation .main-navigation > div > ul > li.current-menu-ancestor > a, .site-header .header-main .header-navigation .main-navigation ul.nav-menu > li.current-menu-ancestor > a, .site-header .header-main .header-navigation .main-navigation > div > ul > li.current-menu-parent > a, .site-header .header-main .header-navigation .main-navigation ul.nav-menu > li.current-menu-parent > a {
+				color: $primary_color1;
+			}
+
+		}
+		select:focus, textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .login-select:focus, .form-control:focus, .uneditable-input:focus {
+			border-color: $primary_color1;
+		}
+		.btn-bg{
+		    text-transform: uppercase;
+		    background: transparent;
+		    border:3px solid;
+		    &.dark {
+		        border-color: #555;
+		        color: #444;
+		        &:hover,&:focus {
+		        	color: $button_primary_color_hover;
+		        }
+		    }
+		    &.light {
+		        border-color: #fff;
+		        color: #fff;
+		    }
+		    &:hover, &:focus {
+		        border-width: 3px; 
+		    }
+		}
+	}
+	&.primary_color2 {
+		.site-header .header-top.layout2 .header-top-wrap .header-top-left .widget div.textwidget .icon-header, .site-header.header-layout2 .header-main .header-navigation .main-navigation .menu-main-menu li.current-menu-ancestor > a, .site-header.header-layout2 .header-main .header-navigation .main-navigation .menu-main-menu li .current-menu-item > a, .site-header.header-layout2 .header-main .header-main-wrap .header-main-right .widget .header-block .block-content a, .team-position, .team-contact li span.title, .site-content ul.case-list li i, .cms-pricing-table.style2 .pricing-icon, .site-footer .info-box ul li span.icon-left, .site-footer.layout2 .footer-top .widget.widget_cs_recent_post_v2 .entry-main .title-recent:before, .footer-bottom a, .cms-testimonial .testimonial .testi-wrap .testi-content .testi-position, .cms-pricing-table.style2 ul.features-list li i, .site-header .header-top.layout2 .header-top-wrap .header-top-left .widget .textwidget > div .icon-header,.site-header.header-layout3 .header-main .menu-main-menu li.current-menu-ancestor > a, .site-header.header-layout3 .header-main .menu-main-menu li .current-menu-item > a, .cms-grid-service-2 .cms-grid-service .item-content ul.service-list, .entry-meta ul li,.site-footer.layout1 .footer-top .contact-info-box .hours li span,.zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a.active, .zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a:hover, .template-cms_grid--blog2 .blog-wrap .entry-footer a:hover, .template-cms_grid--blog2 .blog-wrap .entry-footer a:focus, .promo-video a i, .cms-grid-service-2 .cms-grid-service .item-content ul.service-list li:before, .site-header.header-layout2 .header-main .header-navigation .main-navigation .menu-main-menu > li > a:hover, .site-header.header-layout2 .header-main .header-navigation .main-navigation .menu-main-menu > li > a:focus, .site-header .menu-main-menu > li > ul.sub-menu > li li a:hover, .site-header .menu-main-menu > li > ul.sub-menu > li li a:focus, h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, .template-cms_grid--blog2 .blog-wrap .blog-content .entry-header .entry-category a:hover, .template-cms_grid--blog2 .blog-wrap .blog-content .entry-header .entry-category a:focus, .acumec-blog .entry-header .entry-title a:hover, .acumec-blog .entry-header .entry-title a:focus, .site-footer.layout2 .footer-top a:hover, .site-footer.layout2 .footer-top a:focus, .zo-masonry-wrapper .zo-masonry .zo-masonry-item .cms-grid-inner .item-content .taxs a:hover, .zo-masonry-wrapper .zo-masonry .zo-masonry-item .cms-grid-inner .item-content .taxs a:focus, .site-header .widget_cart_search_wrap .header-search-cart > a:hover, .site-header .widget_cart_search_wrap .header-search-cart > a:focus, .site-header .header-middle .header-middle-wrap .header-middle-right .textwidget.custom-html-widget .block-left .icon-header, .site-header.header-default .header-main .menu-main-menu > li > a:hover, .site-header.header-default .header-main .menu-main-menu > li > a:focus, .site-header.header-default .header-main .menu-main-menu li.current-menu-ancestor > a, .site-header.header-default .header-main .menu-main-menu li.current-menu-item > a, .site-header.header-default .header-main .menu-main-menu li.current-menu-ancestor > a, .site-header.header-default .header-main .menu-main-menu li.current-menu-item > a, .site-header .menu-main-menu ul.sub-menu .current-menu-item > a, .site-header .menu-main-menu ul.sub-menu .current-menu-parent > a, .site-header .menu-main-menu ul.sub-menu .current_page_item > a, .site-header .menu-main-menu > li > ul.sub-menu > li li a:hover, .site-header .menu-main-menu > li > ul.sub-menu > li li a:focus, .cms-blog-carousel .carousel-item .blog-wrap .blog-content > div.blog-content-wrap ul.meta-list li a, .site-footer.layout1 .footer-top a:hover, .site-footer.layout1 .footer-top a:focus,.site-header .header-top.layout2 .widget_cms_socials_widget ul li a:hover, .site-header .header-top.layout2 .widget_cms_socials_widget ul li a:focus, .promo-video p, .site-header.header-layout3 .menu-main-menu > li > a:hover, .site-header.header-layout3 .menu-main-menu > li > a:focus, .widget_authenticate .fs-body .form a:hover, .widget_authenticate .fs-body .form a:focus {
+			color: $primary_color2;	
+		}
+		.zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a.active, .zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a:hover, .zo-masonry-wrapper .zo-masonry-filter ul.zo-filter-category li a:focus {
+			color: $primary_color2 !important;	
+		}
+
+		.btn-theme-primary,.site-header .widget_cart_search_wrap .widget_searchform_content .cshero-dropdown-search .theme_button, .rev_slider .contact-form.contact-service input.btn, .rev_slider .contact-form.contact-service textarea.btn, .contact-form.contact2 .btn-send input[type='submit'], .ef3-back-to-top, .btn-loadmore, .cms-pricing-table.style2.active, .promo-video a span, .site-content .owl-next, .site-content .owl-prev {
+			background: $primary_color2;
+			&:hover, &:focus {
+				background: $button_primary_bg_hover;
+			}
+		}
+		.footer-bottom .widget.widget_cms_socials_widget ul li a:hover, .footer-bottom .widget.widget_cms_socials_widget ul li a:focus, .cms-grid-service-2 .cms-grid-service .item-content ul.service-list li:before, .site-header.header-default .header-main .header-main-right, .cms-blog-carousel .carousel-item .blog-wrap .blog-content > div.blog-date a {
+			background: $primary_color2;
+		}
+		.cms-grid-team-2 .cms-grid-item-wrap .item-content .team-social li a:hover, .cms-grid-team-2 .cms-grid-item-wrap .item-content .team-social li a:focus, .zo-masonry-wrapper .zo-masonry .zo-masonry-item .cms-grid-inner .item-content .grid-link a:hover, .zo-masonry-wrapper .zo-masonry .zo-masonry-item .cms-grid-inner .item-content .grid-link a:focus {
+			background: $primary_color2 !important;
+		}
+		.cms-pricing-table.style2.active .pricing-icon, .cms-pricing-table.style2.active .title h3, .cms-pricing-table.style2.active .pricing, .cms-pricing-table.style2.active .pricing .sub_pricing, .cms-pricing-table.style2.active .description, .cms-pricing-table.style2.active ul.features-list li, .cms-pricing-table.style2.active ul.features-list li i {
+			color: #fff;
+		}
+		@media (min-width: 1200px) {
+			.site-content .template-cms_grid .cms-grid-item .blog-wrap .blog-content .blog-date span.archive-day {
+				color: $primary_color2;
+			}
+		}
+		@media (max-width: 1199px) {
+			.site-header.header-layout2 .navbar-toggle .icon-bar, .site-header.header-default .navbar-toggle .icon-bar, .navbar-toggle:hover .icon-bar, .navbar-toggle:focus .icon-bar  {
+				background: $primary_color2;
+			}
+			.header-navigation .main-navigation .menu-main-menu > ul > li .cs-menu-toggle:hover, .header-navigation .main-navigation .menu-main-menu > li .cs-menu-toggle:hover, .site-header .header-main .header-navigation .main-navigation .menu-main-menu li a:hover, .site-header .header-main .header-navigation .main-navigation .menu-main-menu li a:focus, .site-header .header-main .header-navigation .main-navigation > div > ul > li.current-menu-ancestor > a, .site-header .header-main .header-navigation .main-navigation ul.nav-menu > li.current-menu-ancestor > a, .site-header .header-main .header-navigation .main-navigation > div > ul > li.current-menu-parent > a, .site-header .header-main .header-navigation .main-navigation ul.nav-menu > li.current-menu-parent > a, .site-header .header-main .header-navigation .main-navigation > div > ul > li.current-menu-ancestor > a, .site-header .header-main .header-navigation .main-navigation ul.nav-menu > li.current-menu-ancestor > a, .site-header .header-main .header-navigation .main-navigation > div > ul > li.current-menu-parent > a, .site-header .header-main .header-navigation .main-navigation ul.nav-menu > li.current-menu-parent > a {
+				color: $primary_color2;
+			}
+
+		}
+		select:focus, textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .login-select:focus, .form-control:focus, .uneditable-input:focus {
+			border-color: $primary_color2;
+		}
+		.cms-blog-carousel.cms-carousel .owl-nav .owl-prev:before, .cms-blog-carousel.cms-carousel .owl-nav .owl-next:before {
+			background: $primary_color2_overlay2;
+		}
+		.btn-bg{
+		    text-transform: uppercase;
+		    background: transparent;
+		    border:3px solid;
+		    &.dark {
+		        border-color: #555;
+		        color: #444;
+		        &:hover,&:focus {
+		        	color: $button_primary_color_hover;
+		        }
+		    }
+		    &.light {
+		        border-color: #fff;
+		        color: #fff;
+		    }
+		    &:hover, &:focus {
+		        border-width: 3px; 
+		    }
+		}
+	}
+}

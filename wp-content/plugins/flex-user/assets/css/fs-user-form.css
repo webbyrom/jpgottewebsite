@@ -1,0 +1,74 @@
+/* The fs-popup (background) */
+.fs-center {
+    text-align: center;
+}
+
+.fs-dropdown{
+    display: none;
+}
+
+.fs-popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.fs-popup .fs-header {
+    padding: 0;
+}
+.fs-popup .fs-header h3 {
+    margin-top: 0;
+}
+.fs-popup .fs-card {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 40px 30px;
+}
+ 
+.fs-popup input.fs-full {
+    width: 100%;
+}
+
+.fs-popup button[type=submit] {
+    margin: 10px 0;
+}
+
+.fs-popup label {
+    display: block;
+}
+
+.fs-popup .fs-close {
+    top: 0;
+    right: 0;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    padding: 5px 10px;
+    line-height: 1;
+}
+
+.fs-popup .fs-close:hover,
+.fs-popup .fs-close:focus {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.fs-widget .form {
+    display: none;
+}
+
+.fs-widget .form.active {
+    display: block;
+}

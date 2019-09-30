@@ -1,0 +1,93 @@
+@media screen and (min-width: 1200px){
+	.container {
+	    padding-left: 0;
+	    padding-right: 0;
+	} 
+}
+@media (min-width: 1200px) {
+	.lg-5 {
+		width: 20%;
+		float: left;
+		position: relative;
+	}
+}
+@media (min-width: 992px) {
+	.md-5 {
+		width: 20%;
+		float: left;
+		position: relative;
+	}
+}
+@media screen and (min-width: $boxed_width){
+	body .cs-boxed {
+	    width: $boxed_width;
+	    margin: 0 auto;
+	    overflow: hidden;
+	    position: relative;
+	    .header-layout2 {
+	    	.header-main-right-menu {
+	    		margin-left: 0 !important;
+	    	}
+	    }
+	    .header-layout4 {
+	    	.container-fullwidth {
+	    		padding: 0 30px;
+	    	}
+	    }
+	    .header-layout5, .header-layout6{
+	    	.container-fullwidth {
+	    		padding: 0 15px;
+	    	}
+	    	.site-branding {
+	    		padding: 31px 50px 34px 0px;
+	    		@media (min-width: 1400px) {
+	    			padding: 31px 35px 34px 0px;
+	    		}
+	    	}
+	    }
+	    .header-layout6 {
+	    	.header-main-right {
+	    		display: none !important;
+	    	}
+	    }
+	    .header-layout7 {
+			&.header-transparent .header-main .toggle_menu_side {
+				background: $primary_color;
+			}
+		}
+		.cms-grid-gallery.template-cms_grid--portfolio2 {
+			.grid-link {
+				right: 20px;
+				a {
+					width: 40px;
+					height: 40px;
+					line-height: 38px;
+				}
+			}
+			.cms-grid-item .cms-grid-item-wrap:hover .grid-link {
+				top: 20px;
+			}
+		}
+			
+	}
+	body.boxed-layout{ 
+		.header-fixed{
+			width: $boxed_width !important;
+		}
+		.rev_slider_wrapper.fullwidthbanner-container{
+			width: $boxed_width !important;
+		    left: 50% !important;
+		    @include transform(translate(-50%, 0));
+		}
+		.vc_row[data-vc-stretch-content="true"]{
+			width: $boxed_width !important;
+			margin: 0 auto;
+		    left: 50% !important;
+		    @include transform(translate(-50%, 0));
+	        padding-left: 0 !important;
+    		padding-right: 0 !important;
+		}
+
+	} 
+}
+

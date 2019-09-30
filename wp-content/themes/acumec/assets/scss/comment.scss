@@ -1,0 +1,216 @@
+.comments-area{
+	.comments-title {
+		margin-bottom: 30px;
+		font-weight: 800;
+		font-size: 24px;
+	}
+	@media (min-width: 992px) {
+		.spacing-r5 {
+			padding-right: 5px;
+		}
+		.spacing-l5 {
+			padding-left: 5px;
+		}
+	}
+		
+	ol.comment-list,ol.children{
+		padding: 0;
+		list-style-type: none;
+		li{
+			position: relative;
+			.reply{
+	    		a{
+	    			position: absolute;
+	    			top: -16px;
+	    			right: 15px;
+				    display: inline-block;
+				    padding: 3px 32px;
+				    font-size: 12px;
+				    border-radius: 25px;
+				    font-family: "Open Sans";
+				    text-transform: uppercase;
+				    color: $button_primary_color_regular;
+				    background: $button_primary_bg_regular;
+				    border: 1px solid $button_primary_border_regular;
+				    @include transition(all 0.9s ease 0s);
+
+				    &:hover, &:focus{
+				        background: $button_primary_bg_hover;
+				        border:1px solid $button_primary_border_hover;
+				        color: $button_primary_color_hover;
+				    }
+	    		}
+		    	}
+			.comment-body{				    
+			    border: 3px solid #f4f4f4;
+				@media (min-width: 480px) {
+					display: flex;
+				    >div {
+					    display: flex;
+				    }
+				}    
+				.comment-author-image{
+					img{
+					    min-width: 100px;
+					    max-height: 100px;
+					}	
+				}
+				
+				.commentmetadata {
+				    .comment-author{
+				    	h5.comment-author-title{
+				    		float: left;
+				    		margin: 0px 0 20px 0;
+							font-size: 17px;
+				    		font-weight: 700;
+				    		text-transform: uppercase;
+				    		@media (max-width: 479px) {
+				    			margin-top: 20px;
+				    		}
+				    	}
+				    }
+				    .comment-main {
+				    	p {
+				    		margin-bottom: 0;
+				    	}
+				    }
+					.comment-date{
+		    			color: #a3a3a3;
+		    			cursor: pointer;
+		    			margin-left: 10px;
+					    position: relative;
+					    font-size: 12px;
+					    font-weight: 400;
+					    font-style: italic;
+					    text-transform: none;
+		    		}
+		        }
+			}
+		}
+	}
+	ol.comment-list{
+		margin-bottom: 63px;
+		li {
+			.comment-body {
+				margin-bottom: 40px;
+				padding: 30px;
+			}
+		}
+		.comment-respond{
+			margin-bottom: 40px;
+		}
+		@media (min-width: 1200px) {
+			ol.children{
+				margin-left: 100px;
+		    }
+		}
+		@media (max-width: 1199px) {
+			ol.children{
+				margin-left: 50px;
+		    }
+		}
+		@media (max-width: 767px) {
+			ol.children{
+				margin-left: 30px;
+		    }
+			ol.comment-list{ 
+				.comment-author-image{
+					margin-bottom: 30px;
+					
+				}
+			}
+		}	
+		@media (max-width: 479px) {
+			ol.children{
+				margin-left: 15px;
+		    }
+		}
+	}
+	.commentmetadata {
+		overflow: hidden;
+		@media (min-width: 480px) {
+			padding: 0 0 0 30px;
+			align-items: center;
+		} 
+   	}
+   	.comment-content{
+   		ul{
+   			list-style-type: disc;
+   			padding-left: 20px;
+   		}	
+   	}
+
+	.comment-respond{
+		.comment-reply-title {
+			font-size: 24px;
+			margin-bottom: 25px;
+		}
+		.comment-form{
+			margin: 0 -15px;
+			p{
+				margin-bottom: 0;
+			}
+				input,textarea{	    
+				    margin: 5px 0;
+
+				    font-size: 15px;
+				    font-family: "Lato";
+				}
+
+				input{
+					padding: 10px 30px;
+					height: 53px;
+					border-radius: 25px;
+				}
+				textarea{
+					padding: 12px 30px;
+					height: 160px;
+					border-radius: 20px;
+				}
+
+			.logged-in-as {
+                padding: 0 15px;
+                font-style: italic;
+                line-height: 1;
+                margin-bottom: 15px;
+                >a{
+                	 color: #181818;
+                	font-family: inherit;
+                	&:hover{
+                       color: $link_color_hover;
+                	}
+                }
+			}
+			.logged-in-as +div {
+                width: 100%;
+            }
+			.form-submit{
+				padding: 0 15px;
+				clear: both;
+				text-align: center;
+				input{
+					padding: 10px 40px;
+					text-transform: uppercase;
+					border-radius: 25px;
+					margin: 25px 0 0 0;
+					font-weight: 700;
+					line-height: 1;
+					font-size: 13px;
+					font-family: "Open Sans";	
+					color: $button_primary_color_regular;
+				    background: $button_primary_bg_regular;
+				    border: 1px solid $button_primary_border_regular;
+				    @include transition(all 0.9s ease 0s);
+
+				    &:hover, &:focus{
+				        background: $button_primary_bg_hover;
+				        border:1px solid $button_primary_border_hover;
+				        color: $button_primary_color_hover;
+				    }
+				}
+			}
+		}
+	}
+}
+.commentlist .bypostauthor {background: transparent;}
+.commentlist li ul.children li.bypostauthor {background: transparent;}

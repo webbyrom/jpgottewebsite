@@ -1,0 +1,306 @@
+.panel-group .panel .panel-heading {
+    position: relative;
+}
+
+.panel-heading .header-dropdown {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    list-style: none;
+}
+
+.panel-heading .header-dropdown .dropdown a.dropdown-toggle {
+    padding: 4px 10px;
+}
+
+.panel-heading .header-dropdown .dropdown a i {
+    color: #ffffff;
+}
+
+.custom_card {
+    background: #fff;
+    min-height: 50px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+.content-box *{
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+}
+.custom_card .card-inside-title {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    display: block;
+    font-size: 15px;
+    color: #000;
+}
+
+.custom_card .card-inside-title small {
+    color: #999;
+    display: block;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.custom_card .card-inside-title small a {
+    color: #777;
+    font-weight: bold;
+}
+
+.custom_card .card-inside-title:first-child {
+    margin-top: 0;
+}
+
+.custom_card .bg-red, .custom_card .bg-pink, .custom_card .bg-purple, .custom_card .bg-deep-purple, .custom_card .bg-indigo, .custom_card .bg-blue, .custom_card .bg-light-blue, .custom_card .bg-cyan, .custom_card .bg-teal, .custom_card .bg-green, .custom_card .bg-light-green, .custom_card .bg-lime, .custom_card .bg-yellow, .custom_card .bg-amber, .custom_card .bg-orange, .custom_card .bg-deep-orange, .custom_card .bg-brown, .custom_card .bg-grey, .custom_card .bg-blue-grey, .custom_card .bg-black {
+    border-bottom: none !important;
+    color: #fff !important;
+}
+
+.custom_card .bg-red h2, .custom_card .bg-red small, .custom_card .bg-red .material-icons, .custom_card .bg-pink h2, .custom_card .bg-pink small, .custom_card .bg-pink .material-icons, .custom_card .bg-purple h2, .custom_card .bg-purple small, .custom_card .bg-purple .material-icons, .custom_card .bg-deep-purple h2, .custom_card .bg-deep-purple small, .custom_card .bg-deep-purple .material-icons, .custom_card .bg-indigo h2, .custom_card .bg-indigo small, .custom_card .bg-indigo .material-icons, .custom_card .bg-blue h2, .custom_card .bg-blue small, .custom_card .bg-blue .material-icons, .custom_card .bg-light-blue h2, .custom_card .bg-light-blue small, .custom_card .bg-light-blue .material-icons, .custom_card .bg-cyan h2, .custom_card .bg-cyan small, .custom_card .bg-cyan .material-icons, .custom_card .bg-teal h2, .custom_card .bg-teal small, .custom_card .bg-teal .material-icons, .custom_card .bg-green h2, .custom_card .bg-green small, .custom_card .bg-green .material-icons, .custom_card .bg-light-green h2, .custom_card .bg-light-green small, .custom_card .bg-light-green .material-icons, .custom_card .bg-lime h2, .custom_card .bg-lime small, .custom_card .bg-lime .material-icons, .custom_card .bg-yellow h2, .custom_card .bg-yellow small, .custom_card .bg-yellow .material-icons, .custom_card .bg-amber h2, .custom_card .bg-amber small, .custom_card .bg-amber .material-icons, .custom_card .bg-orange h2, .custom_card .bg-orange small, .custom_card .bg-orange .material-icons, .custom_card .bg-deep-orange h2, .custom_card .bg-deep-orange small, .custom_card .bg-deep-orange .material-icons, .custom_card .bg-brown h2, .custom_card .bg-brown small, .custom_card .bg-brown .material-icons, .custom_card .bg-grey h2, .custom_card .bg-grey small, .custom_card .bg-grey .material-icons, .custom_card .bg-blue-grey h2, .custom_card .bg-blue-grey small, .custom_card .bg-blue-grey .material-icons, .custom_card .bg-black h2, .custom_card .bg-black small, .custom_card .bg-black .material-icons {
+    color: #fff !important;
+}
+
+.custom_card .bg-red .badge, .custom_card .bg-pink .badge, .custom_card .bg-purple .badge, .custom_card .bg-deep-purple .badge, .custom_card .bg-indigo .badge, .custom_card .bg-blue .badge, .custom_card .bg-light-blue .badge, .custom_card .bg-cyan .badge, .custom_card .bg-teal .badge, .custom_card .bg-green .badge, .custom_card .bg-light-green .badge, .custom_card .bg-lime .badge, .custom_card .bg-yellow .badge, .custom_card .bg-amber .badge, .custom_card .bg-orange .badge, .custom_card .bg-deep-orange .badge, .custom_card .bg-brown .badge, .custom_card .bg-grey .badge, .custom_card .bg-blue-grey .badge, .custom_card .bg-black .badge {
+    background-color: #fff;
+    color: #555;
+}
+
+.custom_card .header {
+    color: #555;
+    padding: 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(204, 204, 204, .35);
+}
+
+.custom_card .header .header-dropdown {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    list-style: none;
+}
+
+.custom_card .header .header-dropdown .dropdown-menu li {
+    display: block !important;
+}
+
+.custom_card .header .header-dropdown li {
+    display: inline-block;
+}
+
+.custom_card .header .header-dropdown i {
+    font-size: 20px;
+    color: #999;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+.custom_card .header .header-dropdown i:hover {
+    color: #000;
+}
+
+.custom_card .header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+    color: #111;
+}
+
+.custom_card .header h2 small {
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+    color: #999;
+    line-height: 15px;
+}
+
+.custom_card .header h2 small a {
+    font-weight: bold;
+    color: #777;
+}
+
+.custom_card .body {
+    font-size: 14px;
+    color: #555;
+    padding: 20px;
+}
+
+.custom_card .body .col-xs-1, .custom_card .body .col-sm-1, .custom_card .body .col-md-1, .custom_card .body .col-lg-1 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-2, .custom_card .body .col-sm-2, .custom_card .body .col-md-2, .custom_card .body .col-lg-2 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-3, .custom_card .body .col-sm-3, .custom_card .body .col-md-3, .custom_card .body .col-lg-3 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-4, .custom_card .body .col-sm-4, .custom_card .body .col-md-4, .custom_card .body .col-lg-4 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-5, .custom_card .body .col-sm-5, .custom_card .body .col-md-5, .custom_card .body .col-lg-5 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-6, .custom_card .body .col-sm-6, .custom_card .body .col-md-6, .custom_card .body .col-lg-6 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-7, .custom_card .body .col-sm-7, .custom_card .body .col-md-7, .custom_card .body .col-lg-7 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-8, .custom_card .body .col-sm-8, .custom_card .body .col-md-8, .custom_card .body .col-lg-8 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-9, .custom_card .body .col-sm-9, .custom_card .body .col-md-9, .custom_card .body .col-lg-9 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-10, .custom_card .body .col-sm-10, .custom_card .body .col-md-10, .custom_card .body .col-lg-10 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-11, .custom_card .body .col-sm-11, .custom_card .body .col-md-11, .custom_card .body .col-lg-11 {
+    margin-bottom: 20px;
+}
+
+.custom_card .body .col-xs-12, .custom_card .body .col-sm-12, .custom_card .body .col-md-12, .custom_card .body .col-lg-12 {
+    margin-bottom: 20px;
+}
+
+a:focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+label {
+    font-weight: normal;
+}
+
+input[type=text]:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#wpfooter {
+    position: initial;
+}
+button i{
+    vertical-align:middle;
+    top:0px!important;
+}
+.no-margin-bot{
+   margin-bottom: 0 !important;
+}
+div.description{
+    padding-left: 50px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-style: italic;
+}
+.fields-group input[type="text"],.fields-group input[type="number"]{
+    text-indent: 10px;
+}
+.fields-group .custom_label{
+    /*line-height: 35px;*/
+    margin-bottom: 0;
+}
+.postbox .custom_card{
+    box-shadow: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.postbox .custom_card .body{
+    padding: 0;
+}
+.dynamic-table .action-row td{
+    text-align: center;
+}
+.dynamic-table .action-row .btn-add-field{
+    width: 30%;
+    margin: 15px;
+}
+.dynamic-table th,.dynamic-table td{
+    text-align: center;
+}
+.align-right *{
+    text-align: right;
+}
+.align-left *{
+    text-align: left;
+}
+.dynamic-table .extend-editor .view-port{
+    display: none;
+}
+.view-single{
+    display: none;
+}
+.view-single.active{
+    display: block;
+}
+.table-text-center input,.table-text-center td,.table-text-center th{
+    text-align: center;
+}
+.lds-ring {
+    display: inline-block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+#ef4-loading{
+    z-index: 2000000;
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.btn-text-ui {
+    min-width: 80px;
+}

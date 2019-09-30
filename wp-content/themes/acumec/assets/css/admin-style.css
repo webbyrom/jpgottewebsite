@@ -1,0 +1,51 @@
+.cms-img-select, .img-select img {
+	margin-bottom: 5px;
+	-webkit-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	display: block;
+	margin-bottom: 10px;
+	max-width: 80%;
+    box-shadow: 1px 1px 6px #ddd;
+}
+.vc_ui-panel-content-container .clear {
+    display: table;
+}
+.redux-container{overflow: inherit !important;}
+.img-select li:hover img,.img-select .active img,.cms-img-select.selected {
+	box-shadow: 1px 1px 6px red;
+    cursor: pointer;
+}
+.img-select li{
+    display: inline-block;
+    width: 49%;
+}
+
+.redux-group-tab.social-media table tr{
+    width: 25%;
+    float: left;
+}
+.redux-group-tab.social-media table tr th{
+    display: block;
+}
+.redux-group-tab.social-media table tr th >div{
+    padding-bottom: 0;
+}
+.cms-img-select, .img-select img {
+	margin-bottom: 5px;
+	-webkit-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	display: block;
+	margin-bottom: 10px;
+	max-width: 80%;
+    box-shadow: 1px 1px 6px #ddd;
+}
+.img-select li:hover img,.img-select .active img,.cms-img-select.selected {
+	box-shadow: 1px 1px 6px red;
+    cursor: pointer;
+}
+.img-select li{
+    display: inline-block;
+    width: 49%;
+}
