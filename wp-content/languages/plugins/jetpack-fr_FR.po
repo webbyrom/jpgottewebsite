@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-09-05 00:54:13+0000\n"
+"PO-Revision-Date: 2019-09-30 10:30:19+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1744,8 +1744,16 @@ msgid "Share this post"
 msgstr "Partager cet article"
 
 #: _inc/blocks/editor-beta.js:24 _inc/blocks/editor.js:24
+msgid "Tiled Gallery"
+msgstr "Mosaïque d’images"
+
+#: _inc/blocks/editor-beta.js:24 _inc/blocks/editor.js:24
 msgid "Lets you add an email address with an automatically generated click-to-email link."
 msgstr "Vous permet d'ajouter une adresse e-mail avec génération automatique d'un lien « cliquer pour envoyer un e-mail »."
+
+#: _inc/blocks/editor-beta.js:24 _inc/blocks/editor.js:24
+msgid "Tiled Gallery settings"
+msgstr "Paramètres de la Mosaïque d’images"
 
 #: jetpack.php:74
 msgid "Jetpack requires a more recent version of WordPress and has been paused. Please update WordPress to continue enjoying Jetpack."
