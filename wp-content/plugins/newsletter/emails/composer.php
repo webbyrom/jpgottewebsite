@@ -12,8 +12,6 @@ include NEWSLETTER_INCLUDES_DIR . '/codemirror.php';
 
 if ($controls->is_action()) {
 
-    /*     * * Save or create ** */
-
     if (empty($_GET['id'])) {
 
         $email = array();

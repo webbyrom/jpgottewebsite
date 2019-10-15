@@ -99,7 +99,7 @@ if ($controls->is_action('search')) {
 }
 
 // Eventually fix the page
-if ($controls->data['search_page'] < 0)
+if (!isset($controls->data['search_page']) || $controls->data['search_page'] < 0)
     $controls->data['search_page'] = 0;
 if ($controls->data['search_page'] > $last_page)
     $controls->data['search_page'] = $last_page;

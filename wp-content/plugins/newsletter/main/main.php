@@ -331,13 +331,6 @@ if (!empty($return_path)) {
                         </tr>
 
                         <tr>
-                            <th><?php _e('Send email directly', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->yesno('phpmailer'); ?>
-                                <?php $controls->help('https://www.thenewsletterplugin.com/configuration-tnin-send-email'); ?>
-                            </td>
-                        </tr>
-                        <tr>
                             <th><?php _e('Email encoding', 'newsletter') ?></th>
                             <td>
                                 <?php $controls->select('content_transfer_encoding', array('' => 'Default', '8bit' => '8 bit', 'base64' => 'Base 64', 'binary' => 'Binary', 'quoted-printable' => 'Quoted printable', '7bit' => '7 bit')); ?>

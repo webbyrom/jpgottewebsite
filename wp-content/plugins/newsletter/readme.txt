@@ -2,7 +2,7 @@
 Tags: email, email marketing, newsletter, newsletter subscribers, welcome email, signup forms, contact, lead generation, popup, marketing automation
 Requires at least: 3.4.0
 Tested up to: 5.2.3
-Stable tag: 6.2.2
+Stable tag: 6.3.3
 Requires PHP: 5.6
 Contributors: satollo,webagile,michael-travan
 
@@ -108,6 +108,26 @@ Thank you, The Newsletter Team
 3. The Reports extension
 
 == Changelog ==
+
+= 6.3.3 =
+
+* Fixed the missing admin notification when using the internal SMTP
+
+= 6.3.2 =
+
+* Fixed the admin notification email not sent or bot correctly formatted
+
+= 6.3.1 =
+
+* Empty subject fix
+
+= 6.3.0 =
+
+* New mailer infrastructure: better compatibility and performance
+* New [TEST] prefix for newsletter tests
+* Fix on composer subject saving
+* General performance improvements
+* Fixed title display in header composer block
 
 = 6.2.2 =
 
@@ -289,6 +309,9 @@ Thank you, The Newsletter Team
 
 * Reverted back to select2 3.x
 * Added last_ip field for better geolocation
+* Changed the thumbnails folder from wp-content to wp-content/uploads
+* Added a more uniform internal mailer management
+* Improved the mail test on status panel
 
 = 5.8.4 =
 

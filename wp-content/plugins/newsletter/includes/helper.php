@@ -109,7 +109,7 @@ function tnp_media_resize($media_id, $size) {
     // Thumbnail generation if needed.
     if (!file_exists($absolute_thumb) || filemtime($absolute_thumb) < filemtime($absolute_file)) {
         $r = wp_mkdir_p($uploads['basedir'] . '/newsletter/thumbnails/' . $pathinfo['dirname']);
-
+        
         if (!$r) {
             $src = wp_get_attachment_image_src($media_id, $size);
             return $src[0];
@@ -139,8 +139,6 @@ function tnp_media_resize($media_id, $size) {
             //return $uploads['baseurl'] . '/' . $relative_file;
         }
     }
-
-
 
     return $uploads['baseurl'] . '/newsletter/thumbnails/' . $relative_thumb;
 }

@@ -442,7 +442,7 @@ class NewsletterControls {
         echo '</select>&nbsp;&nbsp;&nbsp;';
     }
 
-    function enabled($name) {
+    function enabled($name = 'enabled') {
         $value = isset($this->data[$name]) ? (int) $this->data[$name] : 0;
 
         echo '<select style="width: 100px" name="options[' . esc_attr($name) . ']">';
@@ -746,7 +746,7 @@ class NewsletterControls {
         $value = $this->get_value($name);
         echo '<input id="options-', esc_attr($name), '" placeholder="' . esc_attr($placeholder) . '" name="options[' . $name . ']" type="text" ';
         if (!empty($size)) {
-            echo 'size="' . $size . '"';
+            echo 'size="' . $size . '" ';
         }
         echo 'value="', esc_attr($value), '">';
     }
@@ -1659,7 +1659,7 @@ class NewsletterControls {
         $value = str_replace('"', '&quot;', $value);
         $value = str_replace('<', '&lt;', $value);
         $value = str_replace('>', '&gt;', $value);
-        echo '<input type="hidden" name="options[', esc_attr($name), ']" id="options-', esc_attr($name), '" value="', $value, '">';
+        echo '<input type="hidden" name="options[', esc_attr($name), ']" id="options-', esc_attr($name), '" value="', esc_attr($value), '">';
 
         // Used by composer to rebuild the full HTML
         $css = NewsletterEmails::instance()->get_composer_css();
@@ -1667,7 +1667,7 @@ class NewsletterControls {
 
         // subject
         $value = $this->get_value('subject');
-        echo '<input type="hidden" name="options[subject]" id="options-subject" value="', $value, '">';
+        echo '<input type="hidden" name="options[subject]" id="options-subject" value="', esc_attr($value), '">';
     }
 
     function composer_load($name = 'body', $show_subject = false, $show_test = true) {

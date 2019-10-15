@@ -52,20 +52,24 @@ $empty = empty($info['header_logo']['id']) && empty($info['header_sub']) && empt
     }
 </style>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr>
-        <td align="left" width="50%" inline-class="header-logo">
-            <?php if ($image) { ?>
-            <a href="#" target="_blank">
-                <img alt="<?php echo esc_attr($info['header_title']) ?>" src="<?php echo $image ?>" style="display: block; max-width: 100%" border="0">
-            </a>
-            <?php } else { ?>
-            <?php } ?>
-        </td>
-        <td width="50%" align="right" class="mobile-hide" inline-class="header-text">
-            <?php echo $info['header_sub'] ?>
-        </td>
-    </tr>
-</table>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+			<?php if ( $image ) { ?>
+            <td align="left" width="50%" inline-class="header-logo">
+                <a href="#" target="_blank">
+                    <img alt="<?php echo esc_attr( $info['header_title'] ) ?>" src="<?php echo $image ?>"
+                         style="display: block; max-width: 100%" border="0">
+                </a>
+				<?php } else { ?>
+            <td align="left" width="50%" inline-class="heading-text"
+                style="padding: 5px; font-size: 24px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #444444;">
+				<?php echo esc_attr( $info['header_title'] ) ?>
+				<?php } ?>
+            </td>
+            <td width="50%" align="right" class="mobile-hide" inline-class="header-text">
+				<?php echo $info['header_sub'] ?>
+            </td>
+        </tr>
+    </table>
 
 <?php } ?>
