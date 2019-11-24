@@ -87,23 +87,37 @@ if (!empty($controls->data['contract_key']) || defined('NEWSLETTER_LICENSE_KEY')
     } else {
         $license_key = $controls->data['contract_key'];
     }
-    $response = wp_remote_get('http://www.thenewsletterplugin.com/wp-content/plugins/file-commerce-pro/check.php?k=' . urlencode($license_key), array('sslverify' => false));
+    
+    $response = wp_remote_get('http://www.thenewsletterplugin.com/wp-content/plugins/file-commerce-pro/license-check.php?k=' . urlencode($license_key), array('sslverify' => false));
 
     if (is_wp_error($response)) {
         /* @var $response WP_Error */
         $controls->errors .= 'It seems that your blog cannot contact the license validator. Ask your provider to unlock the HTTP/HTTPS connections to www.thenewsletterplugin.com<br>';
         $controls->errors .= esc_html($response->get_error_code()) . ' - ' . esc_html($response->get_error_message());
-        $controls->data['licence_expires'] = "";
-    } else if ($response['response']['code'] != 200) {
-        $controls->errors .= '[' . $response['response']['code'] . '] The license seems expired or not valid, please check your <a href="https://www.thenewsletterplugin.com/account">license code and status</a>, thank you.';
-        $controls->errors .= '<br>You can anyway download the professional extension from https://www.thenewsletterplugin.com.';
-        $controls->data['licence_expires'] = "";
-    } elseif ($expires = json_decode(wp_remote_retrieve_body($response))) {
-        $controls->data['licence_expires'] = $expires->expire;
-        $controls->messages = 'Your license is valid and expires on ' . esc_html(date('Y-m-d', $expires->expire));
+        $controls->data['licence_expires'] = '';
     } else {
-        $controls->errors = 'Unable to detect the license expiration. Debug data to report to the support: <code>' . esc_html(wp_remote_retrieve_body($response)) . '</code>';
-        $controls->data['licence_expires'] = "";
+        if (wp_remote_retrieve_response_code($response) != 200) {
+            $controls->errors .= '[' . wp_remote_retrieve_response_code($response) . '] The license validator returned an error, please check your <a href="https://www.thenewsletterplugin.com/account">license code and status</a>, thank you.';
+            $controls->errors .= '<br>You can anyway download the professional addons from https://www.thenewsletterplugin.com if your license is valid.';
+            $controls->data['licence_expires'] = '';
+        } else {
+            $expires = json_decode(wp_remote_retrieve_body($response));
+
+            if (!empty($expires->message)) {
+                $controls->errors = $expires->message;
+            } else {
+                $controls->data['licence_expires'] = $expires->expire;
+
+                if ($expires->expire == -1) {
+                    $controls->messages = 'Your FREE license is valid';
+                } elseif ($expires->expire >= time()) {
+                    $controls->messages = 'Your license is valid and expires on ' . esc_html(date('Y-m-d', $expires->expire));
+                } else {
+                    $controls->messages = 'Your license is expired on ' . esc_html(date('Y-m-d', $expires->expire));
+                }
+            }
+        }
+    
     }
     $module->merge_options($controls->data);
 }
@@ -335,6 +349,17 @@ if (!empty($return_path)) {
                             <td>
                                 <?php $controls->select('content_transfer_encoding', array('' => 'Default', '8bit' => '8 bit', 'base64' => 'Base 64', 'binary' => 'Binary', 'quoted-printable' => 'Quoted printable', '7bit' => '7 bit')); ?>
                                 <?php $controls->help('https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-configuration#encoding') ?>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <th>
+                                <?php _e('Execute shortcodes on newsletters', 'newsletter') ?>
+                                <?php $controls->field_help("https://www.thenewsletterplugin.com/documentation/newsletter-configuration#shortcodes")?>
+                            </th>
+                            <td>
+                                <?php $controls->yesno('do_shortcodes', 40); ?>
+                                <?php $controls->field_help("https://www.thenewsletterplugin.com/documentation/newsletter-configuration#shortcodes")?>
                             </td>
                         </tr>
                     </table>

@@ -81,7 +81,6 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 	 *
 	 * @since 4.0.0
 	 * @version 4.0.0
-	 * @todo Implement proper webhook signature validation. Ref https://stripe.com/docs/webhooks#signatures
 	 * @param string $request_headers The request headers from Stripe.
 	 * @param string $request_body The request body from Stripe.
 	 * @return bool
@@ -173,11 +172,11 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 		$is_pending_receiver = ( 'receiver' === $notification->data->object->flow );
 
 		try {
-			if ( 'processing' === $order->get_status() || 'completed' === $order->get_status() ) {
+			if ( $order->has_status( array( 'processing', 'completed' ) ) ) {
 				return;
 			}
 
-			if ( 'on-hold' === $order->get_status() && ! $is_pending_receiver ) {
+			if ( $order->has_status( 'on-hold' ) && ! $is_pending_receiver ) {
 				return;
 			}
 
@@ -383,7 +382,7 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 
 		$order_id = WC_Stripe_Helper::is_wc_lt( '3.0' ) ? $order->id : $order->get_id();
 
-		if ( 'on-hold' !== $order->get_status() ) {
+		if ( ! $order->has_status( 'on-hold' ) ) {
 			return;
 		}
 
@@ -422,7 +421,7 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 		$order_id = WC_Stripe_Helper::is_wc_lt( '3.0' ) ? $order->id : $order->get_id();
 
 		// If order status is already in failed status don't continue.
-		if ( 'failed' === $order->get_status() ) {
+		if ( $order->has_status( 'failed' ) ) {
 			return;
 		}
 
@@ -458,7 +457,7 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 			return;
 		}
 
-		if ( 'cancelled' !== $order->get_status() ) {
+		if ( ! $order->has_status( 'cancelled' ) ) {
 			$order->update_status( 'cancelled', __( 'This payment has cancelled.', 'woocommerce-gateway-stripe' ) );
 		}
 
@@ -588,7 +587,7 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 		/* translators: 1) The reason type. */
 		$message = sprintf( __( 'The opened review for this order is now closed. Reason: (%s)', 'woocommerce-gateway-stripe' ), $notification->data->object->reason );
 
-		if ( 'on-hold' === $order->get_status() ) {
+		if ( $order->has_status( 'on-hold' ) ) {
 			if ( apply_filters( 'wc_stripe_webhook_review_change_order_status', true, $order, $notification ) ) {
 				$order->update_status( 'processing', $message );
 			} else {
@@ -661,7 +660,7 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 			return;
 		}
 
-		if ( 'pending' !== $order->get_status() && 'failed' !== $order->get_status() ) {
+		if ( ! $order->has_status( array( 'pending', 'failed' ) ) ) {
 			return;
 		}
 
@@ -686,6 +685,43 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 			$order->update_status( 'failed', sprintf( __( 'Stripe SCA authentication failed. Reason: %s', 'woocommerce-gateway-stripe' ), $error_message ) );
 
 			do_action( 'wc_gateway_stripe_process_webhook_payment_error', $order, $notification );
+
+			$this->send_failed_order_email( $order_id );
+		}
+
+		$this->unlock_order_payment( $order );
+	}
+
+	public function process_setup_intent( $notification ) {
+		$intent = $notification->data->object;
+		$order = WC_Stripe_Helper::get_order_by_setup_intent_id( $intent->id );
+
+		if ( ! $order ) {
+			WC_Stripe_Logger::log( 'Could not find order via setup intent ID: ' . $intent->id );
+			return;
+		}
+
+		if ( ! $order->has_status( array( 'pending', 'failed' ) ) ) {
+			return;
+		}
+
+		if ( $this->lock_order_payment( $order, $intent ) ) {
+			return;
+		}
+
+		$order_id = WC_Stripe_Helper::is_wc_lt( '3.0' ) ? $order->id : $order->get_id();
+		if ( 'setup_intent.succeeded' === $notification->type ) {
+			WC_Stripe_Logger::log( "Stripe SetupIntent $intent->id succeeded for order $order_id" );
+			if ( WC_Stripe_Helper::is_pre_orders_exists() && WC_Pre_Orders_Order::order_contains_pre_order( $order ) ) {
+				WC_Pre_Orders_Order::mark_order_as_pre_ordered( $order );
+			} else {
+				$order->payment_complete();
+			}
+		} else {
+			$error_message = $intent->last_setup_error ? $intent->last_setup_error->message : "";
+
+			/* translators: 1) The error message that was received from Stripe. */
+			$order->update_status( 'failed', sprintf( __( 'Stripe SCA authentication failed. Reason: %s', 'woocommerce-gateway-stripe' ), $error_message ) );
 
 			$this->send_failed_order_email( $order_id );
 		}
@@ -744,6 +780,11 @@ class WC_Stripe_Webhook_Handler extends WC_Stripe_Payment_Gateway {
 			case 'payment_intent.payment_failed':
 			case 'payment_intent.amount_capturable_updated':
 				$this->process_payment_intent_success( $notification );
+				break;
+
+			case 'setup_intent.succeeded':
+			case 'setup_intent.setup_failed':
+				$this->process_setup_intent( $notification );
 
 		}
 	}

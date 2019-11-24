@@ -1,9 +1,6 @@
 <?php
 
-if (!defined('ABSPATH'))
-    exit;
-
-require_once NEWSLETTER_INCLUDES_DIR . '/module.php';
+defined('ABSPATH') || exit;
 
 class NewsletterStatistics extends NewsletterModule {
 
@@ -292,6 +289,13 @@ class NewsletterStatistics extends NewsletterModule {
 
         $wpdb->query($wpdb->prepare("update " . $wpdb->prefix . "newsletter_sent s1 join " . $wpdb->prefix . "newsletter_stats s2 on s1.user_id=s2.user_id and s1.email_id=s2.email_id and s1.email_id=%d set s1.open=1, s1.ip=s2.ip", $email->id));
         $wpdb->query($wpdb->prepare("update " . $wpdb->prefix . "newsletter_sent s1 join " . $wpdb->prefix . "newsletter_stats s2 on s1.user_id=s2.user_id and s1.email_id=s2.email_id and s2.url<>'' and s1.email_id=%d set s1.open=2, s1.ip=s2.ip", $email->id));
+    }
+    
+    function reset_stats($email) {
+        global $wpdb;
+        $email_id = $this->to_int_id($email);
+        $this->query("delete from " . $wpdb->prefix . "newsletter_sent where email_id=" . $email_id);
+        $this->query("delete from " . $wpdb->prefix . "newsletter_stats where email_id=" . $email_id);
     }
 
     function get_total_count($email_id) {

@@ -138,6 +138,10 @@ class NewsletterAddon {
         
     }
 
+    /**
+     * 
+     * @return NewsletterLogger
+     */
     function get_logger() {
         if (!$this->logger) {
             $this->logger = new NewsletterLogger($this->name);
@@ -564,6 +568,17 @@ class NewsletterModule {
         $r = $wpdb->query($query);
         if ($r === false) {
             $this->logger->fatal($wpdb->last_error);
+        }
+        return $r;
+    }
+
+    function get_results($query) {
+        global $wpdb;
+        $r = $wpdb->get_results($query);
+        if ($r === false) {
+            $logger = $this->get_logger();
+            $logger->fatal($query);
+            $logger->fatal($wpdb->last_error);
         }
         return $r;
     }
@@ -1750,7 +1765,7 @@ class NewsletterModule {
      */
     function build_action_url($action, $user = null, $email = null) {
         $url = $this->add_qs($this->get_home_url(), 'na=' . urlencode($action));
-        $url = $this->add_qs(admin_url('admin-ajax.php'), 'action=newsletter&na=' . urlencode($action));
+        //$url = $this->add_qs(admin_url('admin-ajax.php'), 'action=newsletter&na=' . urlencode($action));
         if ($user) {
             $url .= '&nk=' . urlencode($this->get_user_key($user));
         }
@@ -2232,6 +2247,13 @@ class NewsletterModule {
         return round($value / $total * 100);
     }
 
+    /**
+     * Takes in a variable and checks if object, array or scalar and return the integer representing
+     * a database record id.
+     * 
+     * @param mixed $var
+     * @return in
+     */
     static function to_int_id($var) {
         if (is_object($var)) {
             return (int) $var->id;
@@ -2240,6 +2262,19 @@ class NewsletterModule {
             return (int) $var['id'];
         }
         return (int) $var;
+    }
+
+    static function to_array($text) {
+        $text = trim($text);
+        if (empty($text)) {
+            return array();
+        }
+        $text = preg_split("/\\r\\n/", $text);
+        $text = array_map('trim', $text);
+        $text = array_map('strtolower', $text);
+        $text = array_filter($text);
+
+        return $text;
     }
 
     static function sanitize_ip($ip) {

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.2.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-10-03 13:43:31+0000\n"
+"PO-Revision-Date: 2019-10-20 17:54:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,11 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fr\n"
 "Project-Id-Version: WordPress - 5.2.x - Administration\n"
+
+#. translators: 1: error message, 2: line number
+#: wp-admin/link-parse-opml.php:89
+msgid "XML Error: %1$s at line %2$s"
+msgstr "Erreur XML : %1$s à la ligne %2$s"
 
 #: wp-admin/user-edit.php:571
 msgid "<a href=\"%s\">You can change your profile picture on Gravatar</a>."

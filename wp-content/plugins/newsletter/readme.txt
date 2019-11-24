@@ -1,8 +1,8 @@
 === Newsletter ===
 Tags: email, email marketing, newsletter, newsletter subscribers, welcome email, signup forms, contact, lead generation, popup, marketing automation
 Requires at least: 3.4.0
-Tested up to: 5.2.3
-Stable tag: 6.3.3
+Tested up to: 5.2.4
+Stable tag: 6.3.9
 Requires PHP: 5.6
 Contributors: satollo,webagile,michael-travan
 
@@ -108,6 +108,37 @@ Thank you, The Newsletter Team
 3. The Reports extension
 
 == Changelog ==
+
+= 6.3.9 =
+
+* Improved antibot and/or spam subscription checks (please review your security configuration)
+
+= 6.3.8 =
+
+* Fixed email encoding when sent with wp_mail() and an encoding is selected on main settings
+* Optimization on sending process
+* Test newsletter stats cleared when real delivery starts
+* Improved image resize
+* Fixed security page help texts
+
+= 6.3.7 =
+
+* Schedules registration fix
+
+= 6.3.6 =
+
+* Improved error detection
+* Fixed stats collection for Autoresponder
+* Changed the init sequence to grant full load of other plugins (newsletter preview problems on some installations)
+* Better reporting on tests
+
+= 6.3.5 =
+
+* New addons panel
+
+= 6.3.4 =
+
+* Fixes
 
 = 6.3.3 =
 

@@ -221,6 +221,8 @@ $speed = Newsletter::$instance->options['scheduler_max'];
                             
                             <?php echo esc_html($name) ?>
                         </td>
+                    </tr>
+                    
                     <tr>
                         <td>Mailing</td>
                         <td>
@@ -254,7 +256,24 @@ $speed = Newsletter::$instance->options['scheduler_max'];
                         </td>
 
                     </tr>
-
+                    
+                    <?php if (ini_get('opcache.validate_timestamps') === '0') { ?>
+                    
+                    <tr>
+                        <td>
+                            Opcache
+                        </td>
+                        
+                        <td>
+                            <span class="tnp-ko">KO</span>
+                        </td>
+                        
+                        <td>
+                            You have the PHP opcache active with file validation disable so every blog plugins update needs a webserver restart!
+                        </td>
+                    </tr>
+                    <?php } ?>
+                    
                     <?php
                     $return_path = $module->options['return_path'];
                     if (!empty($return_path)) {
@@ -892,7 +911,28 @@ $speed = Newsletter::$instance->options['scheduler_max'];
                         <?php
                     }
                     ?>
+                       
 
+                    <tr>
+                        <td>
+                            Cron warnings
+                        </td>
+                        <td>
+                            <?php if (defined('NEWSLETTER_CRON_WARNINGS') && !NEWSLETTER_CRON_WARNINGS) { ?>
+                                <span class="tnp-maybe">MAYBE</span>
+                            <?php } else { ?>
+                                <span class="tnp-ok">OK</span>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php if (defined('NEWSLETTER_CRON_WARNINGS') && !NEWSLETTER_CRON_WARNINGS) { ?>
+                            Scheduler warnings are disabled in your wp-config.php with the constant <code>NEWSLETTER_CRON_WARNINGS</code> set to true.
+                            <?php } else { ?>
+
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    
                     <tr>
                         <td>
                             WordPress debug mode
@@ -1064,12 +1104,7 @@ $speed = Newsletter::$instance->options['scheduler_max'];
                         </td>
                     </tr>
                     
-                    <tr>
-                        <td>NEWSLETTER_CRON_INTERVAL</td>
-                        <td>
-                            <?php echo NEWSLETTER_CRON_INTERVAL . ' (seconds)'; ?>
-                        </td>
-                    </tr>
+                    
 
                     <?php /*
                       <tr>

@@ -36,7 +36,7 @@
 .row:after {
     display: table;
     content: " ";
-    
+
 }
 .row:after {
     clear: both;
@@ -106,9 +106,9 @@
 @font-face {
     font-family: "Circular Std";
     src: url("vendor/fonts/CircularStd-Medium.woff") format("woff"),
-    url("vendor/fonts/CircularStd-Medium.woff2") format("woff2"),
-    url("vendor/fonts/CircularStd-Medium.eot") format("embedded-opentype"),
-    url("vendor/fonts/CircularStd-Medium.ttf") format("truetype");
+        url("vendor/fonts/CircularStd-Medium.woff2") format("woff2"),
+        url("vendor/fonts/CircularStd-Medium.eot") format("embedded-opentype"),
+        url("vendor/fonts/CircularStd-Medium.ttf") format("truetype");
 
 }
 
@@ -116,9 +116,9 @@
     font-family: "Circular Std";
     font-weight: bold;
     src: url("vendor/fonts/CircularStd-Bold.woff") format("woff"),
-    url("vendor/fonts/CircularStd-Bold.woff2") format("woff2"),
-    url("vendor/fonts/CircularStd-Bold.eot") format("embedded-opentype"),
-    url("vendor/fonts/CircularStd-Bold.ttf") format("truetype");
+        url("vendor/fonts/CircularStd-Bold.woff2") format("woff2"),
+        url("vendor/fonts/CircularStd-Bold.eot") format("embedded-opentype"),
+        url("vendor/fonts/CircularStd-Bold.ttf") format("truetype");
 }
 
 #tnp-wrap, 
@@ -1614,16 +1614,16 @@ Tnp Welcome Slider
 -------------------------------- */
 
 .cd-slider-wrapper {
-  position: relative;
-  width: 100%;
-  height: 90vh;
-  /* hide horizontal scrollbar on IE11 */
-  overflow: hidden;
-  margin: 0 auto;
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    /* hide horizontal scrollbar on IE11 */
+    overflow: hidden;
+    margin: 0 auto;
 }
 .cd-slider-wrapper .cd-slider, .cd-slider-wrapper .cd-slider > li {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 .tnp-logo-big {
@@ -1757,111 +1757,111 @@ Tnp Welcome Slider
 }
 
 .cd-slider > li {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  /* used to vertically center its content */
-  display: table;
-  background-position: center center;
-  background-repeat: no-repeat;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    /* used to vertically center its content */
+    display: table;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 .cd-slider > li.visible {
-  /* selected slide */
-  position: relative;
-  z-index: 2;
-  opacity: 1;
+    /* selected slide */
+    position: relative;
+    z-index: 2;
+    opacity: 1;
 }
 .cd-slider > li:first-of-type {
-  background-color: #2B313A;
+    background-color: #2B313A;
 }
 .cd-slider > li:nth-of-type(2) {
-  background-color: #2B313A;
+    background-color: #2B313A;
 }
 .cd-slider > li:nth-of-type(3) {
-  background-color: #2B313A;
+    background-color: #2B313A;
 }
 .cd-slider > li:nth-of-type(4) {
-  background-color: #2B313A;
+    background-color: #2B313A;
 }
 .cd-slider > li:first-of-type, .cd-slider > li:nth-of-type(2), .cd-slider > li:nth-of-type(3), .cd-slider > li:nth-of-type(4) {
-  background-size: cover;
+    background-size: cover;
 }
 .cd-slider > li > div {
-  /* vertically center the slider content */
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
+    /* vertically center the slider content */
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
 .cd-slider > li h2, .cd-slider > li p {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  line-height: 1.2;
-  margin: 0 auto 14px;
-  color: #ffffff;
-  width: 90%;
-  max-width: 320px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
+    margin: 0 auto 14px;
+    color: #ffffff;
+    width: 90%;
+    max-width: 320px;
 }
 .cd-slider > li h2 {
     font-size: 40px;
-  }
-  .cd-slider > li p {
+}
+.cd-slider > li p {
     font-size: 18px;
     line-height: 26px;
     text-align: left;
     color: #B8C3C9;
     margin: 40px auto;
-  }
-  
+}
+
 .cd-slider > li .cd-btn {
-  display: inline-block;
-  padding: 1.2em 1.4em;
-  margin-top: .8em;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: .25em;
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #ffffff;
-  text-transform: uppercase;
-  -webkit-transition: background-color 0.2s;
-  -moz-transition: background-color 0.2s;
-  transition: background-color 0.2s;
+    display: inline-block;
+    padding: 1.2em 1.4em;
+    margin-top: .8em;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: .25em;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-transform: uppercase;
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    transition: background-color 0.2s;
 }
 .no-touch .cd-slider > li .cd-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 @media only screen and (min-width: 768px) {
-  .cd-slider > li h2, .cd-slider > li p {
-    max-width: 520px;
-  }
-  .cd-slider > li h2 {
-    font-size: 40px;
-  }
-  .cd-slider > li p {
-    font-size: 18px;
-    line-height: 26px;
-    text-align: left;
-    color: #B8C3C9;
-    margin: 40px auto;
-    
-  }
+    .cd-slider > li h2, .cd-slider > li p {
+        max-width: 520px;
+    }
+    .cd-slider > li h2 {
+        font-size: 40px;
+    }
+    .cd-slider > li p {
+        font-size: 18px;
+        line-height: 26px;
+        text-align: left;
+        color: #B8C3C9;
+        margin: 40px auto;
+
+    }
 }
 @media only screen and (min-width: 1170px) {
-  .cd-slider > li h2, .cd-slider > li p {
-    margin-bottom: 20px;
-  }
-  .cd-slider > li h2 {
-    font-size: 40px;
-  }
-  .cd-slider > li p {
-    font-size: 18px;
-    line-height: 26px;
-    text-align: center;
-    color: #B8C3C9;
-    margin: 30px auto;
-  }
+    .cd-slider > li h2, .cd-slider > li p {
+        margin-bottom: 20px;
+    }
+    .cd-slider > li h2 {
+        font-size: 40px;
+    }
+    .cd-slider > li p {
+        font-size: 18px;
+        line-height: 26px;
+        text-align: center;
+        color: #B8C3C9;
+        margin: 30px auto;
+    }
 }
 
 /* -------------------------------- 
@@ -1880,33 +1880,33 @@ Tnp Welcome Slider Navigation
 /* svg cover layer */
 
 .cd-svg-cover {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
 }
 .cd-svg-cover path {
-  fill: #ED6A6A;
+    fill: #ED6A6A;
 }
 .cd-svg-cover.is-animating {
-  z-index: 4;
-  opacity: 1;
-  -webkit-transition: opacity 0.6s;
-  -moz-transition: opacity 0.6s;
-  transition: opacity 0.6s;
+    z-index: 4;
+    opacity: 1;
+    -webkit-transition: opacity 0.6s;
+    -moz-transition: opacity 0.6s;
+    transition: opacity 0.6s;
 }
 
 /* Switch element style */
 
 /* The switch - the box around the slider */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
 }
 
 /* Hide default HTML checkbox */
@@ -1914,50 +1914,50 @@ Tnp Welcome Slider Navigation
 
 /* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+    background-color: #2196F3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 /* Cossa sea sta roba? ORDINE! */
@@ -2109,16 +2109,16 @@ iframe.tnp-editor-preview-mobile {
 }
 
 iframe.tnp-editor-preview-desktop {
-     box-sizing: border-box; 
-     background-color: #fff; 
-     border: 1px solid #bbb; 
-     border-radius: 10px; 
-     box-shadow: 1px 1px 10px #777; 
-     padding: 15px; 
-     width: 650px; 
-     margin-right: 20px; 
-     height: 500px; 
-     float: left;
+    box-sizing: border-box; 
+    background-color: #fff; 
+    border: 1px solid #bbb; 
+    border-radius: 10px; 
+    box-shadow: 1px 1px 10px #777; 
+    padding: 15px; 
+    width: 650px; 
+    margin-right: 20px; 
+    height: 500px; 
+    float: left;
 }
 
 
@@ -2443,4 +2443,56 @@ span.tnp-email-status-sent {
     box-sizing: border-box;
     padding: 10px;
     float: left;
+}
+
+/* Addons page */
+
+#tnp-promo {
+    text-align: left;
+    background-color: #222b36;
+    margin: 20px;
+    border-radius: 5px;
+    padding: 20px 40px;
+}
+#tnp-promo .tnp-promo-how-to {
+    width: 50%;
+    padding: 5px 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-left: 2px solid #F1C40F;
+}
+
+#tnp-promo .tnp-promo-how-to h3  {
+    color: #ECF0F1;
+    margin: 0px;
+    line-height: 36px;
+}
+
+#tnp-promo .tnp-promo-how-to p  {
+    color: #ECF0F1;
+    margin: 0px;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+#tnp-promo .tnp-promo-buttons {
+    margin: 50px 0px;
+}
+
+#tnp-promo .tnp-promo-button {
+    background: #27AE60;
+    text-decoration: none;
+    color: white;
+    padding: 15px 20px;
+    font-size: 15px;
+    border-radius: 2px;
+}
+
+#tnp-promo .tnp-promo-button:hover {
+    background: #2ECC71;
+    color: white;
+}
+
+#tnp-promo .tnp-promo-button i {
+    margin-right: 3px;
 }

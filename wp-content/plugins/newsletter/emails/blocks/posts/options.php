@@ -3,7 +3,16 @@
 /* @var $options array contains all the options the current block we're ediging contains */
 /* @var $controls NewsletterControls */
 /* @var $fields NewsletterFields */
+
 ?>
+<?php if ($context['type'] == 'automated') { ?>
+<p>This is a dynamic block which is regenerated with the latest posts when Automated generate a new newsletter.</p>
+
+<?php $fields->select('automated_include', __('What to include', 'newsletter'), array('new' => __('New posts after last newsletter', 'newsletter'), 
+    'max' => __('Always max posts if at least one is new', 'newsletter')),
+        array('description'=>'This option is effective only when the newsletter is generated, not while composing')) ?>
+    <?php $fields->checkbox('automated_required', __('Required', 'newsletter'), array('description'=>'This block must return content or the newslettter has not to be sent')) ?>
+<?php } ?>
 
 <?php $fields->select('layout', __('Layout', 'newsletter'), array('one' => __('One column', 'newsletter'), 'two' => __('Two columns', 'newsletter'))) ?>
 

@@ -66,8 +66,19 @@ if (!empty($context['last_run'])) {
 
 $posts = Newsletter::instance()->get_posts($filters, $options['language']);
 
-if (empty($posts) && !empty($context['last_run'])) {
-    return;
+if ($context['type'] == 'automated') {
+    // No new posts
+    if (empty($posts)) {
+        if (isset($options['automated_required'])) {
+            $out['return_empty_message'] = true;
+        }
+        return;
+    } 
+    
+    if ($options['automated_include'] == 'max') {
+        unset($filters['date_query']);
+        $posts = Newsletter::instance()->get_posts($filters, $options['language']);
+    }
 }
 
 $out['subject'] = $posts[0]->post_title;

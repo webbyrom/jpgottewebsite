@@ -1554,7 +1554,7 @@ class NewsletterControls {
         if ($time == false) {
             $buffer = 'none';
         } else {
-            $buffer = gmdate(get_option('date_format') . ' ' . get_option('time_format'), $time + get_option('gmt_offset') * 3600);
+            $buffer = date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $time + get_option('gmt_offset') * 3600);
         }
         if ($now) {
             $buffer .= ' (now: ' . gmdate(get_option('date_format') . ' ' .
@@ -1670,7 +1670,7 @@ class NewsletterControls {
         echo '<input type="hidden" name="options[subject]" id="options-subject" value="', esc_attr($value), '">';
     }
 
-    function composer_load($name = 'body', $show_subject = false, $show_test = true) {
+    function composer_load($name = 'body', $show_subject = false, $show_test = true, $context_type = '') {
 
         global $controls;
         global $tnpc_show_subject;

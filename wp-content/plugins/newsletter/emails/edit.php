@@ -216,15 +216,18 @@ if ($controls->is_action('test') || $controls->is_action('save') || $controls->i
 }
 
 if ($controls->is_action('send') || $controls->is_action('schedule')) {
+    
+    NewsletterStatistics::instance()->reset_stats($email);
+    
     if ($email['subject'] == '') {
         $controls->errors = __('A subject is required to send', 'newsletter');
     } else {
         $wpdb->update(NEWSLETTER_EMAILS_TABLE, array('status' => 'sending'), array('id' => $email_id));
         $email['status'] = 'sending';
         if ($controls->is_action('send')) {
-	        $controls->messages = __( 'Now sending.', 'newsletter' );
+            $controls->messages = __( 'Now sending.', 'newsletter' );
         } else {
-	        $controls->messages = __( 'Scheduled.', 'newsletter' );
+            $controls->messages = __( 'Scheduled.', 'newsletter' );
         }
     }
 }

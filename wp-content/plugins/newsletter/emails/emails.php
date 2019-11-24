@@ -92,6 +92,9 @@ class NewsletterEmails extends NewsletterModule {
             include NEWSLETTER_INCLUDES_DIR . '/controls.php';
         }
         $options = $this->options_decode(stripslashes_deep($_REQUEST['options']));
+        
+        $context = array('type'=>'');
+        if (isset($_REQUEST['context_type'])) $context['type'] = $_REQUEST['context_type'];
 
 //        $defaults = array(
 //            'block_padding_top' => 15,
@@ -213,6 +216,9 @@ class NewsletterEmails extends NewsletterModule {
 
             ob_start();
             $out = $this->render_block($options['block_id'], true, $options, $context);
+            if ($out['return_empty_message']) {
+                return '';
+            }
             if (empty($subject) && !empty($out['subject'])) {
                 $subject = $out['subject'];
             }
@@ -289,7 +295,7 @@ class NewsletterEmails extends NewsletterModule {
             return;
         }
 
-        $out = array('subject' => '');
+        $out = array('subject' => '', 'return_empty_message'=>false);
 
 
         ob_start();
@@ -956,7 +962,7 @@ class NewsletterEmails extends NewsletterModule {
         if ($email->subject == '') {
             $email->subject = '[TEST] Dummy subject, it was empty (remember to set it)';
         } else {
-            $email->subject = '[TEST] ' . $email->subject;
+            $email->subject = $email->subject . ' (TEST)';
         }
         $users = NewsletterUsers::instance()->get_test_users();
         if (count($users) == 0) {
@@ -964,15 +970,22 @@ class NewsletterEmails extends NewsletterModule {
                     '. <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank"><strong>' .
                     __('Read more', 'newsletter') . '</strong></a>.';
         } else {
-            $r = Newsletter::instance()->send($email, $users);
+            $r = Newsletter::instance()->send($email, $users, true);
+            $emails = array();
+            foreach ($users as $user) {
+                $emails[] = '<a href="admin.php?page=newsletter_users_edit&id=' . $user->id . '" target="_blank">' . $user->email . '</a>';
+            }
             if (is_wp_error($r)) {
-                $controls->errors = $r->get_error_message();
-                $controls->errors .= '<br><a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank"><strong>' . __('Read more about delivery issues', 'newsletter') . '</strong></a>.';
+                $controls->errors = 'Something went wrong. Check the error logs on status page.<br>';
+                $controls->errors .= __('Test subscribers:', 'newsletter');
+                $controls->errors .= ' ' . implode(', ', $emails);
+                $controls->errors .= '<br>';
+                $controls->errors .= '<strong>' . esc_html($r->get_error_message()) . '</strong><br>';
+                $controls->errors .= '<a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank"><strong>' . __('Read more about delivery issues', 'newsletter') . '</strong></a>.';
             } else {
-                $controls->messages = __('Test newsletter sent to:', 'newsletter');
-                foreach ($users as $user) {
-                    $controls->messages .= ' ' . $user->email;
-                }
+                $controls->messages = __('Test subscribers:', 'newsletter');
+                
+                $controls->messages .= ' ' . implode(', ', $emails);
                 $controls->messages .= '.<br>';
                 $controls->messages .= '<a href="https://www.thenewsletterplugin.com/documentation/subscribers#test" target="_blank"><strong>' .
                         __('Read more about test subscribers', 'newsletter') . '</strong></a>.<br>';

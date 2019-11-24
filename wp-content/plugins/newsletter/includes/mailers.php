@@ -111,13 +111,20 @@ class NewsletterDefaultMailer extends NewsletterMailer {
 
         if (!$this->filter_active) {
             add_action('phpmailer_init', function ($mailer) {
+                $newsletter = Newsletter::instance();
+                if (!empty($newsletter->options['content_transfer_encoding'])) {
+                    $mailer->Encoding = $newsletter->options['content_transfer_encoding'];
+                } else {
+                    $mailer->Encoding = 'base64';
+                }
+                    
                 // If there is not a current message, wp_mail() was not called by us
                 if (is_null($this->current_message)) {
                     return;
                 }
                 
                 /* @var $mailer PHPMailer */
-                $mailer->Sender = Newsletter::instance()->options['return_path'];
+                $mailer->Sender = $newsletter->options['return_path'];
                 
                 if (!empty($this->current_message->body) && !empty($this->current_message->body_text)) {
                     $mailer->AltBody = $this->current_message->body_text;

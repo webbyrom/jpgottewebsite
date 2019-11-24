@@ -35,7 +35,7 @@ class NewsletterSubscription extends NewsletterModule {
 
     function __construct() {
 
-        parent::__construct('subscription', '2.1.7', null, array('lists', 'template', 'profile'));
+        parent::__construct('subscription', '2.2.7', null, array('lists', 'template', 'profile', 'antibot'));
         $this->options_profile = $this->get_options('profile');
         $this->options_lists = $this->get_options('lists');
 
@@ -109,13 +109,15 @@ class NewsletterSubscription extends NewsletterModule {
     }
 
     function is_address_blacklisted($email) {
-        if (empty($this->options['address_blacklist'])) {
+        // TODO: Optimize!
+        $options = $this->get_options('antibot');
+        if (empty($options['address_blacklist'])) {
             return false;
         }
 
         $this->logger->debug('Address blacklist check');
         $rev_email = strrev($email);
-        foreach ($this->options['address_blacklist'] as $item) {
+        foreach ($options['address_blacklist'] as $item) {
             if (strpos($rev_email, strrev($item)) === 0) {
                 return true;
             }
@@ -124,11 +126,13 @@ class NewsletterSubscription extends NewsletterModule {
     }
 
     function is_ip_blacklisted($ip) {
-        if (empty($this->options['ip_blacklist'])) {
+        // TODO: Optimize!
+        $options = $this->get_options('antibot');
+        if (empty($options['ip_blacklist'])) {
             return false;
         }
         $this->logger->debug('IP blacklist check');
-        foreach ($this->options['ip_blacklist'] as $item) {
+        foreach ($options['ip_blacklist'] as $item) {
             if ($this->ip_match($ip, $item)) {
                 return true;
             }
@@ -156,8 +160,10 @@ class NewsletterSubscription extends NewsletterModule {
 
     function is_flood($email, $ip) {
         global $wpdb;
-
-        if (empty($this->options['antiflood'])) {
+        // TODO: Optimize!
+        $options = $this->get_options('antibot');
+        
+        if (empty($options['antiflood'])) {
             return false;
         }
 
@@ -165,7 +171,7 @@ class NewsletterSubscription extends NewsletterModule {
 
         $updated = $wpdb->get_var($wpdb->prepare("select updated from " . NEWSLETTER_USERS_TABLE . " where ip=%s or email=%s order by updated desc limit 1", $ip, $email));
 
-        if ($updated && time() - $updated < $this->options['antiflood']) {
+        if ($updated && time() - $updated < $options['antiflood']) {
             return true;
         }
 
@@ -183,7 +189,10 @@ class NewsletterSubscription extends NewsletterModule {
     }
 
     function is_spam_by_akismet($email, $name, $ip, $agent, $referrer) {
-        if (empty($this->options['akismet'])) {
+        // TODO: Optimize!
+        $options = $this->get_options('antibot');
+        
+        if (empty($options['akismet'])) {
             return false;
         }
         if (!class_exists('Akismet')) {
@@ -283,10 +292,12 @@ class NewsletterSubscription extends NewsletterModule {
                     $antibot_logger->fatal($email . ' - ' . $ip . ' - HTTP method invalid');
                     die('Invalid');
                 }
+                
+                $options_antibot = $this->get_options('antibot');
 
-                $captcha = !empty($this->options['captcha']);
+                $captcha = !empty($options_antibot['captcha']);
 
-                if (!empty($this->options['antibot_disable']) || $this->antibot_form_check($captcha)) {
+                if (!empty($options_antibot['disabled']) || $this->antibot_form_check($captcha)) {
 
 
                     if ($this->is_spam_text($full_name)) {
@@ -397,6 +408,25 @@ class NewsletterSubscription extends NewsletterModule {
     function upgrade() {
         global $wpdb, $charset_collate;
 
+        // Possible migration
+        $options_antibot = $this->get_options('antibot');
+
+        if (empty($options_antibot)) {
+            $options = $this->get_options();
+            foreach (array('address_blacklist', 'ip_blacklist', 'akismet', 'captcha', 'antiflood') as $key) {
+                if (isset($options[$key])) {
+                    $options_antibot[$key] = $options[$key];
+                }
+            }
+            if (isset($options['antibot_disable'])) {
+                $options_antibot['disabled'] = $options['antibot_disable'];
+            } else {
+                $options_antibot['disabled'] = 0;
+            }
+
+            $this->save_options($options_antibot, 'antibot');
+        }
+
         parent::upgrade();
 
         $newsletter = Newsletter::instance();
@@ -457,6 +487,8 @@ class NewsletterSubscription extends NewsletterModule {
         }
 
         $this->init_options('template', false);
+
+
 
         global $wpdb, $charset_collate;
 

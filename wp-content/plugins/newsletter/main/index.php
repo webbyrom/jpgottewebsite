@@ -244,11 +244,11 @@ $labels = array_reverse( $labels );
                                 </a>
                             </h3>
                             <div class="inside">
-                                <div class="tnp-video-container">
+                                <!-- <div class="tnp-video-container">
                                     <iframe width="480" height="360"
                                             src="https://www.youtube.com/embed/JaxK7XwqvVI?rel=0" frameborder="0"
                                             allowfullscreen></iframe>
-                                </div>
+                                </div> -->
                                 <div>
                                     <a class="orange"
                                        href="https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-documentation/email-sending-issues"
