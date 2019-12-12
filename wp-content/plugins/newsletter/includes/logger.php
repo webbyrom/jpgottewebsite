@@ -2,7 +2,7 @@
 defined('ABSPATH') || exit;
 
 if (!defined('NEWSLETTER_LOG_DIR')) {
-    define('NEWSLETTER_LOG_DIR', WP_CONTENT_DIR . '/logs/newsletter/');
+    define('NEWSLETTER_LOG_DIR', WP_CONTENT_DIR . '/logs/newsletter');
 }
 
 class NewsletterLogger {

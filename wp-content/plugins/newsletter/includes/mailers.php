@@ -38,6 +38,7 @@ class NewsletterMailMethodWrapper extends NewsletterMailer {
         }
         return true;
     }
+
 }
 
 /**
@@ -78,6 +79,7 @@ class NewsletterOldMailerWrapper extends NewsletterMailer {
         }
         return true;
     }
+
 }
 
 /**
@@ -86,18 +88,13 @@ class NewsletterOldMailerWrapper extends NewsletterMailer {
 class NewsletterDefaultMailer extends NewsletterMailer {
 
     var $filter_active = false;
-    
-    /**
-     * Used when the internal SMTP is active
-     * @var PHPMailer 
-     */
-    var $mailer = null;
 
     /**
+     * Static to be accessed in the hook: on some installation the object $this is not working, we're still trying to understand why
      * @var TNP_Mailer_Message 
      */
     var $current_message = null;
-    
+
     function __construct() {
         parent::__construct('default', Newsletter::instance()->get_options('smtp'));
     }
@@ -107,30 +104,31 @@ class NewsletterDefaultMailer extends NewsletterMailer {
         return 'wp_mail() WordPress function (could be extended by a SMTP plugin)';
     }
 
+    function fix_mailer($mailer) {
+        $newsletter = Newsletter::instance();
+        if (!empty($newsletter->options['content_transfer_encoding'])) {
+            $mailer->Encoding = $newsletter->options['content_transfer_encoding'];
+        } else {
+            $mailer->Encoding = 'base64';
+        }
+
+        // If there is not a current message, wp_mail() was not called by us
+        if (is_null($this->current_message)) {
+            return;
+        }
+
+        /* @var $mailer PHPMailer */
+        $mailer->Sender = $newsletter->options['return_path'];
+
+        if (!empty($this->current_message->current_message->body) && !empty($this->current_message->current_message->body_text)) {
+            $mailer->AltBody = $this->current_message->current_message->body_text;
+        }
+    }
+
     function send($message) {
 
         if (!$this->filter_active) {
-            add_action('phpmailer_init', function ($mailer) {
-                $newsletter = Newsletter::instance();
-                if (!empty($newsletter->options['content_transfer_encoding'])) {
-                    $mailer->Encoding = $newsletter->options['content_transfer_encoding'];
-                } else {
-                    $mailer->Encoding = 'base64';
-                }
-                    
-                // If there is not a current message, wp_mail() was not called by us
-                if (is_null($this->current_message)) {
-                    return;
-                }
-                
-                /* @var $mailer PHPMailer */
-                $mailer->Sender = $newsletter->options['return_path'];
-                
-                if (!empty($this->current_message->body) && !empty($this->current_message->body_text)) {
-                    $mailer->AltBody = $this->current_message->body_text;
-                }
-                
-            }, 100);
+            add_action('phpmailer_init', array($this, 'fix_mailer'), 100);
             $this->filter_active = true;
         }
 
@@ -142,7 +140,7 @@ class NewsletterDefaultMailer extends NewsletterMailer {
         if (!empty($newsletter->options['reply_to'])) {
             $wp_mail_headers[] = 'Reply-To: ' . $newsletter->options['reply_to'];
         }
-        
+
         // Manage from and from name
 
         if (!empty($message->headers)) {
@@ -161,11 +159,11 @@ class NewsletterDefaultMailer extends NewsletterMailer {
             $message->error = 'Empty body';
             return new WP_Error(self::ERROR_GENERIC, 'Message format');
         }
-       
+
         $this->current_message = $message;
         $r = wp_mail($message->to, $message->subject, $body, $wp_mail_headers);
         $this->current_message = null;
-        
+
         if (!$r) {
             $last_error = error_get_last();
             if (is_array($last_error)) {
@@ -182,6 +180,7 @@ class NewsletterDefaultMailer extends NewsletterMailer {
         }
         return true;
     }
+
 }
 
 /**
@@ -190,7 +189,7 @@ class NewsletterDefaultMailer extends NewsletterMailer {
 class NewsletterDefaultSMTPMailer extends NewsletterMailer {
 
     var $mailer = null;
-    
+
     function __construct($options) {
         parent::__construct('internal-smtp', $options);
     }
@@ -208,7 +207,7 @@ class NewsletterDefaultSMTPMailer extends NewsletterMailer {
         $logger = $this->get_logger();
         $logger->debug('Start sending to ' . $message->to);
         $mailer = $this->get_mailer();
-        
+
         if (!empty($message->body)) {
             $mailer->IsHTML(true);
             $mailer->Body = $message->body;
@@ -218,7 +217,7 @@ class NewsletterDefaultSMTPMailer extends NewsletterMailer {
             $mailer->Body = $message->body_text;
             $mailer->AltBody = '';
         }
-        
+
         $mailer->Subject = $message->subject;
 
         $mailer->ClearCustomHeaders();
@@ -235,7 +234,7 @@ class NewsletterDefaultSMTPMailer extends NewsletterMailer {
             $newsletter = Newsletter::instance();
             $mailer->setFrom($newsletter->options['sender_email'], $newsletter->options['sender_name']);
         }
-        
+
         $mailer->ClearAddresses();
         $mailer->AddAddress($message->to);
         $mailer->Send();
@@ -249,7 +248,7 @@ class NewsletterDefaultSMTPMailer extends NewsletterMailer {
             $message->error = $mailer->ErrorInfo;
             return new WP_Error(self::ERROR_GENERIC, $mailer->ErrorInfo);
         }
-        
+
         $logger->debug('Sent ' . $message->to);
         //$logger->error('Time: ' . (microtime(true) - $start) . ' seconds');
         return true;
@@ -318,5 +317,5 @@ class NewsletterDefaultSMTPMailer extends NewsletterMailer {
 
         return $this->mailer;
     }
-}
 
+}

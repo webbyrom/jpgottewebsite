@@ -53,6 +53,7 @@ if (!$controls->is_action()) {
 
         //$module->hook_newsletter_extension_versions(true);
         delete_transient("tnp_extensions_json");
+        delete_transient('newsletter_license_data');
     }
 
     if ($controls->is_action('create')) {
@@ -78,48 +79,20 @@ if (!$controls->is_action()) {
     }
 }
 
-/* TODO switch to check_license function */
+$license_data = $module->get_license_data(true);
 
-if (!empty($controls->data['contract_key']) || defined('NEWSLETTER_LICENSE_KEY')) {
-
-    if (defined('NEWSLETTER_LICENSE_KEY')) {
-        $license_key = NEWSLETTER_LICENSE_KEY;
-    } else {
-        $license_key = $controls->data['contract_key'];
-    }
-    
-    $response = wp_remote_get('http://www.thenewsletterplugin.com/wp-content/plugins/file-commerce-pro/license-check.php?k=' . urlencode($license_key), array('sslverify' => false));
-
-    if (is_wp_error($response)) {
-        /* @var $response WP_Error */
-        $controls->errors .= 'It seems that your blog cannot contact the license validator. Ask your provider to unlock the HTTP/HTTPS connections to www.thenewsletterplugin.com<br>';
-        $controls->errors .= esc_html($response->get_error_code()) . ' - ' . esc_html($response->get_error_message());
-        $controls->data['licence_expires'] = '';
-    } else {
-        if (wp_remote_retrieve_response_code($response) != 200) {
-            $controls->errors .= '[' . wp_remote_retrieve_response_code($response) . '] The license validator returned an error, please check your <a href="https://www.thenewsletterplugin.com/account">license code and status</a>, thank you.';
-            $controls->errors .= '<br>You can anyway download the professional addons from https://www.thenewsletterplugin.com if your license is valid.';
-            $controls->data['licence_expires'] = '';
+if (is_wp_error($license_data)) {
+        $controls->errors .= esc_html('[' . $license_data->get_error_code()) . '] - ' . esc_html($license_data->get_error_message());
+} else {
+    if ($license_data !== false) {
+        if ($license_data->expire == 0) {
+            $controls->messages = 'Your FREE license is valid';
+        } elseif ($license_data->expire >= time()) {
+            $controls->messages = 'Your license is valid and expires on ' . esc_html(date('Y-m-d', $license_data->expire));
         } else {
-            $expires = json_decode(wp_remote_retrieve_body($response));
-
-            if (!empty($expires->message)) {
-                $controls->errors = $expires->message;
-            } else {
-                $controls->data['licence_expires'] = $expires->expire;
-
-                if ($expires->expire == -1) {
-                    $controls->messages = 'Your FREE license is valid';
-                } elseif ($expires->expire >= time()) {
-                    $controls->messages = 'Your license is valid and expires on ' . esc_html(date('Y-m-d', $expires->expire));
-                } else {
-                    $controls->messages = 'Your license is expired on ' . esc_html(date('Y-m-d', $expires->expire));
-                }
-            }
+            $controls->errors = 'Your license is expired on ' . esc_html(date('Y-m-d', $license_data->expire));
         }
-    
     }
-    $module->merge_options($controls->data);
 }
 
 $return_path = $module->options['return_path'];

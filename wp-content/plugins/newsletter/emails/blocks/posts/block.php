@@ -91,6 +91,8 @@ $button_color = $options['button_font_color'];
 
 $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.png';
 $alternative_2 = plugins_url('newsletter') . '/emails/blocks/posts/images/blank-240x160.png';
+
+remove_all_filters('excerpt_more');
 ?>
 
 <?php if ($options['layout'] == 'one') { ?>

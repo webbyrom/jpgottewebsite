@@ -24,7 +24,7 @@
 
 <?php $fields->checkbox('show_date', __('Show date', 'newsletter')) ?>
 
-<?php $fields->select_number('max', __('Max posts', 'newsletter'), 1, 20); ?>
+<?php $fields->select_number('max', __('Max posts', 'newsletter'), 1, 40); ?>
 
 <?php $fields->language(); ?>
 

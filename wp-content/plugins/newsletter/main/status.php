@@ -8,10 +8,12 @@ $controls = new NewsletterControls();
 
 
 $wp_cron_calls = get_option('newsletter_diagnostic_cron_calls', array());
+$total = 0;
+$wp_cron_calls_max = 0;
+$wp_cron_calls_min = 0;
+$wp_cron_calls_avg = 0;
 if (count($wp_cron_calls) > 20) {
-    $total = 0;
-    $wp_cron_calls_max = 0;
-    $wp_cron_calls_min = 0;
+    
     for ($i = 1; $i < count($wp_cron_calls); $i++) {
         $diff = $wp_cron_calls[$i] - $wp_cron_calls[$i - 1];
         $total += $diff;
@@ -1036,9 +1038,9 @@ $speed = Newsletter::$instance->options['scheduler_max'];
 
                     <?php
                     wp_mkdir_p(NEWSLETTER_LOG_DIR);
-                    $res = is_dir(NEWSLETTER_LOG_DIR);
+                    $res = is_dir(NEWSLETTER_LOG_DIR) && is_writable(NEWSLETTER_LOG_DIR);
                     if ($res) {
-                        file_put_contents(NEWSLETTER_LOG_DIR . '/test.txt', "");
+                        @file_put_contents(NEWSLETTER_LOG_DIR . '/test.txt', "");
                         $res = is_file(NEWSLETTER_LOG_DIR . '/test.txt');
                         if ($res) {
                             @unlink(NEWSLETTER_LOG_DIR . '/test.txt');

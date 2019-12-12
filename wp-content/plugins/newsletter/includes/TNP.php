@@ -16,286 +16,297 @@
  * @author roby
  */
 class TNP {
-    /*
-     * The full process of subscription
-     */
+	/*
+	 * The full process of subscription
+	 */
 
-    public static function subscribe($params) {
+	public static function subscribe( $params ) {
 
-        $newsletter = Newsletter::instance();
-        $subscription = NewsletterSubscription::instance();
+		$newsletter   = Newsletter::instance();
+		$subscription = NewsletterSubscription::instance();
 
-        // default params
-	    $defaults = array('send_emails' => true);
-	    $params = array_merge ($defaults, $params);
+		// default params
+		$defaults = array( 'send_emails' => true );
+		$params   = array_merge( $defaults, $params );
 
-        // Messages
-        $options = get_option('newsletter', array());
+		// Messages
+		$options = get_option( 'newsletter', array() );
 
-        // Form field configuration
-        $options_profile = get_option('newsletter_profile', array());
+		// Form field configuration
+		$options_profile = get_option( 'newsletter_profile', array() );
 
-        $optin = (int) $options['noconfirmation']; // 0 - double, 1 - single
+		$optin = (int) $options['noconfirmation']; // 0 - double, 1 - single
 
-        $email = $newsletter->normalize_email(stripslashes($params['email']));
+		$email = $newsletter->normalize_email( stripslashes( $params['email'] ) );
 
-        // Should never reach this point without a valid email address
-        if ($email == null) {
-            return new WP_Error('-1', 'Email address not valid', array('status' => 400));
-        }
+		// Should never reach this point without a valid email address
+		if ( $email == null ) {
+			return new WP_Error( '-1', 'Email address not valid', array( 'status' => 400 ) );
+		}
 
-        $user = $newsletter->get_user($email);
+		$user = $newsletter->get_user( $email );
 
-        if ($user != null) {
+		if ( $user != null ) {
 
-            $newsletter->logger->info('Subscription of an address with status ' . $user->status);
+			$newsletter->logger->info( 'Subscription of an address with status ' . $user->status );
 
-            // Bounced
-            if ($user->status == 'B') {
-                return new WP_Error('-1', 'Bounced address', array('status' => 400));
-            }
+			// Bounced
+			if ( $user->status == 'B' ) {
+				return new WP_Error( '-1', 'Bounced address', array( 'status' => 400 ) );
+			}
 
-            // If asked to put in confirmed status, do not check further
-            if ($params['status'] != 'C' && $optin == 0) {
+			// If asked to put in confirmed status, do not check further
+			if ( $params['status'] != 'C' && $optin == 0 ) {
 
-                // Already confirmed
-                //if ($optin == 0 && $user->status == 'C') {
-                if ($user->status == 'C') {
+				// Already confirmed
+				//if ($optin == 0 && $user->status == 'C') {
+				if ( $user->status == 'C' ) {
 
-                    set_transient($user->id . '-' . $user->token, $params, 3600 * 48);
-                    $subscription->set_updated($user);
+					set_transient( $user->id . '-' . $user->token, $params, 3600 * 48 );
+					$subscription->set_updated( $user );
 
-                    // A second subscription always require confirmation otherwise anywan can change other users' data
-                    $user->status = 'S';
-                    $subscription->send_activation_email($user);
+					// A second subscription always require confirmation otherwise anywan can change other users' data
+					$user->status = 'S';
+					$subscription->send_activation_email( $user );
 
-                    return $user;
-                }
-            }
-        }
+					return $user;
+				}
+			}
+		}
 
-        if ($user != null) {
-            $newsletter->logger->info("Email address subscribed but not confirmed");
-            $user = array('id' => $user->id);
-        } else {
-            $newsletter->logger->info("New email address");
-        }
+		if ( $user != null ) {
+			$newsletter->logger->info( "Email address subscribed but not confirmed" );
+			$user = array( 'id' => $user->id );
+		} else {
+			$newsletter->logger->info( "New email address" );
+		}
 
-        if ($optin) {
-            $params['status'] = 'C';
-        } else {
-            $params['status'] = 'S';
-        }
-        
-        // Lists
- 
-        if (!isset($params['lists']) || !is_array($params['lists'])) {
-            $params['lists'] = array();
-        }
-        
-        // Public lists: rebuild the array keeping only the valid lists
-        $lists = $newsletter->get_lists_public();
-        
-        // Public list IDs
-        $public_lists = array();
-        foreach ($lists as $list) {
-            $public_lists[] = $list->id;
-        }
-        
-        // Keep only the public lists
-        $params['lists'] = array_intersect($public_lists, $params['lists']);
-        
-        // Pre assigned lists
-        $lists = $newsletter->get_lists();
-        foreach ($lists as $list) {
-            if ($list->forced) {
-                $params['lists'][] =  $list->id;
-            }
-        }
+		if ( $optin ) {
+			$params['status'] = 'C';
+		} else {
+			$params['status'] = 'S';
+		}
 
-        apply_filters('newsletter_api_subscribe', $params);
-        
-        $user = TNP::add_subscriber($params);
+		// Lists
 
-        if (is_wp_error($user)) {
-            return ($user);
-        }
+		if ( ! isset( $params['lists'] ) || ! is_array( $params['lists'] ) ) {
+			$params['lists'] = array();
+		}
 
-        // Notification to admin (only for new confirmed subscriptions)
-        if ($user->status == 'C') {
-            do_action('newsletter_user_confirmed', $user);
-            $subscription->notify_admin($user, 'Newsletter subscription');
-            setcookie('newsletter', $user->id . '-' . $user->token, time() + 60 * 60 * 24 * 365, '/');
-        }
+		// Public lists: rebuild the array keeping only the valid lists
+		$lists = $newsletter->get_lists_public();
 
-        // skip messages if send_emails = false
-        if (!$params['send_emails']) {
-            return $user;
-        }
+		// Public list IDs
+		$public_lists = array();
+		foreach ( $lists as $list ) {
+			$public_lists[] = $list->id;
+		}
 
-        $message_type = ($user->status == 'C') ? 'confirmed' : 'confirmation';
-        $subscription->send_message($message_type, $user);
+		// Keep only the public lists
+		$params['lists'] = array_intersect( $public_lists, $params['lists'] );
 
-        return $user;
-    }
+		// Pre assigned lists
+		$lists = $newsletter->get_lists();
+		foreach ( $lists as $list ) {
+			if ( $list->forced ) {
+				$params['lists'][] = $list->id;
+			}
+		}
 
-    /*
-     * The UNsubscription
-     */
+		// Keep only the public profile fields
+		for ( $i = 1; $i <= NEWSLETTER_PROFILE_MAX; $i ++ ) {
+			// If the profile cannot be set by subscriber, skip it.
+			if ( $subscription->options_profile[ 'profile_' . $i . '_status' ] == 0 ) {
+				unset( $params[ 'profile_' . $i ] );
+			}
+		}
 
-    public static function unsubscribe($params) {
+		apply_filters( 'newsletter_api_subscribe', $params );
 
-        $newsletter = Newsletter::instance();
-        $user = $newsletter->get_user($params['email']);
+		$user = TNP::add_subscriber( $params );
+
+		if ( is_wp_error( $user ) ) {
+			return ( $user );
+		}
+
+		// Notification to admin (only for new confirmed subscriptions)
+		if ( $user->status == 'C' ) {
+			do_action( 'newsletter_user_confirmed', $user );
+			$subscription->notify_admin( $user, 'Newsletter subscription' );
+			setcookie( 'newsletter', $user->id . '-' . $user->token, time() + 60 * 60 * 24 * 365, '/' );
+		}
+
+		// skip messages if send_emails = false
+		if ( ! $params['send_emails'] ) {
+			return $user;
+		}
+
+		$message_type = ( $user->status == 'C' ) ? 'confirmed' : 'confirmation';
+		$subscription->send_message( $message_type, $user );
+
+		return null;
+	}
+
+	/*
+	 * The UNsubscription
+	 */
+
+	public static function unsubscribe( $params ) {
+
+		$newsletter = Newsletter::instance();
+		$user       = $newsletter->get_user( $params['email'] );
 
 //        $newsletter->logger->debug($params);
 
-        if (!$user) {
-            return new WP_Error('-1', 'Email address not found', array('status' => 404));
-        }
+		if ( ! $user ) {
+			return new WP_Error( '-1', 'Email address not found', array( 'status' => 404 ) );
+		}
 
-        if ($user->status == 'U') {
-            return $user;
-        }
+		if ( $user->status == 'U' ) {
+			return $user;
+		}
 
-        $user = $newsletter->set_user_status($user, 'U');
+		$user = $newsletter->set_user_status( $user, 'U' );
 
-        if (empty(NewsletterSubscription::instance()->options['unsubscribed_disabled'])) {
-            $newsletter->mail($user->email, $newsletter->replace(NewsletterSubscription::instance()->options['unsubscribed_subject'], $user), $newsletter->replace(NewsletterSubscription::instance()->options['unsubscribed_message'], $user));
-        }
-        NewsletterSubscription::instance()->notify_admin($user, 'Newsletter unsubscription');
+		if ( empty( NewsletterSubscription::instance()->options['unsubscribed_disabled'] ) ) {
+			$newsletter->mail( $user->email, $newsletter->replace( NewsletterSubscription::instance()->options['unsubscribed_subject'], $user ), $newsletter->replace( NewsletterSubscription::instance()->options['unsubscribed_message'], $user ) );
+		}
+		NewsletterSubscription::instance()->notify_admin( $user, 'Newsletter unsubscription' );
 
-        return $user;
-    }
+		return $user;
+	}
 
-    /*
-     * Adds a subscriber if not already in
-     */
+	/*
+	 * Adds a subscriber if not already in
+	 */
 
-    public static function add_subscriber($params) {
+	public static function add_subscriber( $params ) {
 
-        $newsletter = Newsletter::instance();
+		$newsletter   = Newsletter::instance();
+		$subscription = NewsletterSubscription::instance();
 
-        $email = $newsletter->normalize_email(stripslashes($params['email']));
+		$email = $newsletter->normalize_email( stripslashes( $params['email'] ) );
 
-        if (!$email) {
-            return new WP_Error('-1', 'Email address not valid', array('status' => 400));
-        }
+		if ( ! $email ) {
+			return new WP_Error( '-1', 'Email address not valid', array( 'status' => 400 ) );
+		}
 
-        $user = $newsletter->get_user($email);
+		$user = $newsletter->get_user( $email );
 
-        if ($user) {
-            return new WP_Error('-1', 'Email address already exists', array('status' => 400));
-        }
+		if ( $user ) {
+			return new WP_Error( '-1', 'Email address already exists', array( 'status' => 400 ) );
+		}
 
-        $user = array('email' => $email);
+		$user = array( 'email' => $email );
 
-        if (isset($params['name'])) {
-            $user['name'] = $newsletter->normalize_name(stripslashes($params['name']));
-        }
+		if ( isset( $params['name'] ) ) {
+			$user['name'] = $newsletter->normalize_name( stripslashes( $params['name'] ) );
+		}
 
-        if (isset($params['surname'])) {
-            $user['surname'] = $newsletter->normalize_name(stripslashes($params['surname']));
-        }
+		if ( isset( $params['surname'] ) ) {
+			$user['surname'] = $newsletter->normalize_name( stripslashes( $params['surname'] ) );
+		}
 
-        if (!empty($params['gender'])) {
-            $user['sex'] = $newsletter->normalize_sex($params['gender']);
-        }
+		if ( ! empty( $params['gender'] ) ) {
+			$user['sex'] = $newsletter->normalize_sex( $params['gender'] );
+		}
 
-        if (isset($params['profile']) && is_array($params['profile'])) {
-            foreach ($params['profile'] as $key => $value) {
-                $user['profile_' . $key] = trim(stripslashes($value));
-            }
-        }
+		for ( $i = 1; $i <= NEWSLETTER_PROFILE_MAX; $i ++ ) {
+			if ( isset( $params[ 'profile_' . $i ] ) ) {
+				$user[ 'profile_' . $i ] = trim( stripslashes( $params[ 'profile_' . $i ] ) );
+			}
+		}
 
-        // Lists (an arrayunder the key "lists")
-        // Preferences (field names are nl[] and values the list number so special forms with radio button can work)
-        if (isset($params['lists']) && is_array($params['lists'])) {
-            foreach ($params['lists'] as $list_id) {
-                $user['list_' . ((int)$list_id)] = 1;
-            }
-        }
+		// Lists (an array under the key "lists")
+		// Preferences (field names are nl[] and values the list number so special forms with radio button can work)
+		if ( isset( $params['lists'] ) && is_array( $params['lists'] ) ) {
+			foreach ( $params['lists'] as $list_id ) {
+				$user[ 'list_' . ( (int) $list_id ) ] = 1;
+			}
+		}
 
 
-        if (!empty($params['status'])) {
-            $user['status'] = $params['status'];
-        } else {
-            $user['status'] = 'C';
-        }
+		if ( ! empty( $params['status'] ) ) {
+			$user['status'] = $params['status'];
+		} else {
+			$user['status'] = 'C';
+		}
 
-        $user['token'] = $newsletter->get_token();
-        $user['updated'] = time();
-        
-        $user['ip'] = Newsletter::get_remote_ip();
+		$user['token']   = $newsletter->get_token();
+		$user['updated'] = time();
 
-        $user = $newsletter->save_user($user);
+		$user['ip'] = Newsletter::get_remote_ip();
 
-        return $user;
-    }
+		$user = $newsletter->save_user( $user );
 
-    /*
-     * Subscribers list
-     */
+		return $user;
+	}
 
-    public static function subscribers($params) {
+	/*
+	 * Subscribers list
+	 */
 
-        global $wpdb;
-        $newsletter = Newsletter::instance();
+	public static function subscribers( $params ) {
 
-        $items_per_page = 20;
-        $where = "";
+		global $wpdb;
+		$newsletter = Newsletter::instance();
 
-        $query = "select name, email from " . NEWSLETTER_USERS_TABLE . ' ' . $where . " order by id desc";
-        $query .= " limit 0," . $items_per_page;
-        $list = $wpdb->get_results($query);
+		$items_per_page = 20;
+		$where          = "";
 
-        return $list;
-    }
+		$query = "select name, email from " . NEWSLETTER_USERS_TABLE . ' ' . $where . " order by id desc";
+		$query .= " limit 0," . $items_per_page;
+		$list  = $wpdb->get_results( $query );
 
-    /*
-     * Deletes a subscriber
-     */
+		return $list;
+	}
 
-    public static function delete_subscriber($params) {
+	/*
+	 * Deletes a subscriber
+	 */
 
-        global $wpdb;
-        $newsletter = Newsletter::instance();
+	public static function delete_subscriber( $params ) {
 
-        $user = $newsletter->get_user($params['email']);
+		global $wpdb;
+		$newsletter = Newsletter::instance();
 
-        if (!$user) {
-            return new WP_Error('-1', 'Email address not found', array('status' => 404));
-        }
+		$user = $newsletter->get_user( $params['email'] );
 
-        if ($wpdb->query($wpdb->prepare("delete from " . NEWSLETTER_USERS_TABLE . " where id=%d", (int) $user->id))) {
-            return "OK";
-        } else {
-            $newsletter->logger->debug($wpdb->last_query);
-            return new WP_Error('-1', $wpdb->last_error, array('status' => 400));
-        }
-    }
+		if ( ! $user ) {
+			return new WP_Error( '-1', 'Email address not found', array( 'status' => 404 ) );
+		}
 
-    /*
-     * Newsletters list
-     */
+		if ( $wpdb->query( $wpdb->prepare( "delete from " . NEWSLETTER_USERS_TABLE . " where id=%d", (int) $user->id ) ) ) {
+			return "OK";
+		} else {
+			$newsletter->logger->debug( $wpdb->last_query );
 
-    public static function newsletters($params) {
+			return new WP_Error( '-1', $wpdb->last_error, array( 'status' => 400 ) );
+		}
+	}
 
-        global $wpdb;
-	    $newsletter = Newsletter::instance();
+	/*
+	 * Newsletters list
+	 */
 
-        $list = $wpdb->get_results("SELECT id, subject, created, status, total, sent, send_on FROM " . NEWSLETTER_EMAILS_TABLE . " ORDER BY id DESC LIMIT 10", OBJECT);
+	public static function newsletters( $params ) {
 
-        if ($wpdb->last_error) {
-            $newsletter->logger->error($wpdb->last_error);
-            return false;
-        }
+		global $wpdb;
+		$newsletter = Newsletter::instance();
 
-        if (empty($list)) {
-            return array();
-        }
+		$list = $wpdb->get_results( "SELECT id, subject, created, status, total, sent, send_on FROM " . NEWSLETTER_EMAILS_TABLE . " ORDER BY id DESC LIMIT 10", OBJECT );
 
-        return $list;
-    }
+		if ( $wpdb->last_error ) {
+			$newsletter->logger->error( $wpdb->last_error );
+
+			return false;
+		}
+
+		if ( empty( $list ) ) {
+			return array();
+		}
+
+		return $list;
+	}
 
 }

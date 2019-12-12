@@ -4,7 +4,7 @@
   Plugin Name: Newsletter
   Plugin URI: https://www.thenewsletterplugin.com/plugins/newsletter
   Description: Newsletter is a cool plugin to create your own subscriber list, to send newsletters, to build your business. <strong>Before update give a look to <a href="https://www.thenewsletterplugin.com/category/release">this page</a> to know what's changed.</strong>
-  Version: 6.3.9
+  Version: 6.4.0
   Author: Stefano Lissa & The Newsletter Team
   Author URI: https://www.thenewsletterplugin.com
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -28,7 +28,7 @@
 
  */
 
-define('NEWSLETTER_VERSION', '6.3.9');
+define('NEWSLETTER_VERSION', '6.4.0');
 
 global $newsletter, $wpdb;
 
@@ -186,11 +186,28 @@ class Newsletter extends NewsletterModule {
 
         add_shortcode('newsletter_replace', array($this, 'shortcode_newsletter_replace'));
 
-        if (!method_exists('NewsletterExtensions', 'hook_site_transient_update_plugins')) {
-            add_filter('site_transient_update_plugins', array($this, 'hook_site_transient_update_plugins'));
-        }
+        add_filter('site_transient_update_plugins', array($this, 'hook_site_transient_update_plugins'));
 
         if (is_admin()) {
+            if (!class_exists('NewsletterExtensions')) {
+                
+                add_filter('plugin_row_meta', function ($plugin_meta, $plugin_file) {
+                    
+                    static $slugs = array();
+                    if (empty($slugs)) {
+                        $addons = $this->getTnpExtensions();
+                        foreach ($addons as $addon) {
+                            $slugs[] = $addon->wp_slug;
+                        }
+                    }
+                    if (array_search($plugin_file, $slugs) !== false) {
+
+                        $plugin_meta[] = '<a href="admin.php?page=newsletter_main_extensions" style="font-weight: bold">Newsletter Addons Manager required</a>';
+                    }
+                    return $plugin_meta;
+                }, 10, 2);
+            }
+        
             add_action('in_admin_header', array($this, 'hook_in_admin_header'), 1000);
 
             if ($this->is_admin_page()) {
@@ -642,7 +659,6 @@ class Newsletter extends NewsletterModule {
                 $wpdb->query("update " . NEWSLETTER_EMAILS_TABLE . " set status='sent', total=sent where id=" . $email->id . " limit 1");
                 return true;
             }
-
         } else {
             $this->logger->info(__METHOD__ . '> Subscribers supplied');
         }
@@ -670,7 +686,7 @@ class Newsletter extends NewsletterModule {
                 $user = apply_filters('newsletter_send_user', $user);
                 $message = $this->build_message($email, $user);
                 $this->save_sent_message($message);
-                
+
                 if (!$test) {
                     $wpdb->query("update " . NEWSLETTER_EMAILS_TABLE . " set sent=sent+1, last_id=" . $user->id . " where id=" . $email->id . " limit 1");
                 }
@@ -709,7 +725,7 @@ class Newsletter extends NewsletterModule {
                     $message = $this->build_message($email, $user);
                     $this->save_sent_message($message);
                     $messages[] = $message;
-                    
+
                     if (!$test) {
                         $wpdb->query("update " . NEWSLETTER_EMAILS_TABLE . " set sent=sent+1, last_id=" . $user->id . " where id=" . $email->id . " limit 1");
                     }
@@ -724,7 +740,7 @@ class Newsletter extends NewsletterModule {
                         $this->save_sent_message($message);
                     }
                 }
-                
+
                 if (is_wp_error($r)) {
                     $this->logger->error($r);
                     return $r;
@@ -747,7 +763,7 @@ class Newsletter extends NewsletterModule {
         if ($supplied_users && $this->limits_exceeded()) {
             $result = false;
         }
-        
+
         $this->logger->info(__METHOD__ . '> End run for email ' . $email->id);
 
         return $result;
@@ -1064,11 +1080,11 @@ class Newsletter extends NewsletterModule {
             $plugin->plugin = $extension->plugin;
             $plugin->new_version = $extension->version;
             $plugin->url = $extension->url;
-            if (class_exists('NewsletterExtensions') && $extension->downloadable) {
+            if (class_exists('NewsletterExtensions')) {
                 // NO filters here!
                 $plugin->package = NewsletterExtensions::$instance->get_package($extension->id, $license_key);
             } else {
-                
+                $plugin->package = '';
             }
 //            [banners] => Array
 //                        (
@@ -1132,9 +1148,6 @@ class Newsletter extends NewsletterModule {
 
         if (empty($extensions_json)) {
             $url = "http://www.thenewsletterplugin.com/wp-content/extensions.json?ver=" . NEWSLETTER_VERSION;
-            if (!empty($this->options['contract_key'])) {
-                $url = "http://www.thenewsletterplugin.com/wp-content/plugins/file-commerce-pro/extensions.php?k=" . $this->options['contract_key'] . '&ver=' . NEWSLETTER_VERSION;
-            }
             $extensions_response = wp_remote_get($url);
             $extensions_json = wp_remote_retrieve_body($extensions_response);
             if (!empty($extensions_json)) {
@@ -1216,6 +1229,74 @@ class Newsletter extends NewsletterModule {
         return false;
     }
 
+    function get_license_data($refresh = false) {
+
+        if (!$refresh) {
+            $license_data = get_transient('newsletter_license_data');
+            if (!empty($license_data) && is_object($license_data)) {
+                return $license_data;
+            }
+        }
+        
+        $this->logger->debug('Refreshing the license data');
+        
+        delete_transient('newsletter_license_data');
+
+        $license_key = $this->get_license_key();
+        if (empty($license_key)) {
+            $this->logger->debug('License was empty');
+            return false;
+        }
+        $license_data_url = 'https://www.thenewsletterplugin.com/wp-content/plugins/file-commerce-pro/get-license-data.php';
+
+        $response = wp_remote_post($license_data_url, array(
+            'body' => array('k' => $license_key)
+        ));
+
+        // Fall back to http...
+        if (is_wp_error($response)) {
+            $this->logger->error('Falling back to http');
+            $this->logger->error($response);
+            $response = wp_remote_post($license_data_url, array(
+                'body' => array('k' => $license_key)
+            ));
+            if (is_wp_error($response)) {
+                $this->logger->error($response);
+                return $response;
+            }
+        }
+        
+        $download_message = 'You can download all addons from www.thenewsletterplugin.com if your license is valid.';
+
+        if (wp_remote_retrieve_response_code($response) != '200') {
+            $this->logger->error('license data error: ' . wp_remote_retrieve_response_code($response));
+            return new WP_Error(wp_remote_retrieve_response_code($response), 'License validation service error. <br>' . $download_message);
+        }
+        
+        $json = wp_remote_retrieve_body($response);
+        $data = json_decode($json);
+
+        if (!is_object($data)) {
+            $this->logger->error($json);
+            return new WP_Error(1, 'License validation service error. <br>' . $download_message);
+        }
+
+        if (isset($data->message)) {
+            return new WP_Error(1, $data->message . ' (check the license on Newsletter main settings)');
+        }
+
+        $timeout = 24 * 7 * 3600;
+        if ($data->expire < time() + $timeout) $timeout = $data->expire;
+        set_transient('newsletter_license_data', $data, $timeout);
+
+        return $data;
+    }
+
+    /**
+     * @deprecated
+     * @param type $license_key
+     * @return \WP_Error
+     */
     public static function check_license($license_key) {
         $response = wp_remote_get('http://www.thenewsletterplugin.com/wp-content/plugins/file-commerce-pro/check.php?k=' . urlencode($license_key), array('sslverify' => false));
         if (is_wp_error($response)) {

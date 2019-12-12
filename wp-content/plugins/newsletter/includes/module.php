@@ -118,16 +118,6 @@ class NewsletterAddon {
         }
         add_action('newsletter_init', array($this, 'init'));
 
-        if (is_admin()) {
-            if (!class_exists('NewsletterExtensions')) {
-                add_filter('plugin_row_meta', function ($plugin_meta, $plugin_file) {
-                    if ($plugin_file === 'newsletter-' . $this->name . '/' . $this->name . '.php') {
-                        $plugin_meta[] = '<a href="admin.php?page=newsletter_main_extensions" style="font-weight: bold">Newsletter Addons Manager required</a>';
-                    }
-                    return $plugin_meta;
-                }, 10, 2);
-            }
-        }
     }
 
     function upgrade($first_install = false) {
@@ -269,7 +259,6 @@ class NewsletterMailer {
     const ERROR_FATAL = '2';
 
     /* @var NewsletterLogger */
-
     var $logger;
     var $name;
     var $options;
