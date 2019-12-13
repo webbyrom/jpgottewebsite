@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce PayPal Checkout Payment Gateway - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-05-17 13:45:53+0000\n"
+"PO-Revision-Date: 2019-12-09 13:18:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,14 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fr\n"
 "Project-Id-Version: Plugins - WooCommerce PayPal Checkout Payment Gateway - Stable (latest release)\n"
+
+#: includes/class-wc-gateway-ppec-plugin.php:237
+msgid "<p>PayPal Checkout with new <strong>Smart Payment Buttons™</strong> gives your customers the power to pay the way they want without leaving your site.</p><p>The <strong>existing buttons will be removed</strong> in the <strong>next release</strong>. Please upgrade to Smart Payment Buttons on the <a href=\"%s\">PayPal Checkout settings page</a>.</p>"
+msgstr "<p>PayPal Checkout avec les nouveaux <strong>Smart Payment Buttons™</strong> permet à vos clients de payer selon la méthode de leur choix, sans quitter votre site.</p><p>Les <strong>boutons existants seront supprimés</strong> lors de la <strong>prochaine publication</strong>. Veuillez mettre à niveau vers les Smart Payment Buttons sur la <a href=\"%s\">page de réglages de PayPal Checkout</a>.</p>"
+
+#. Description of the plugin
+msgid "Accept all major credit and debit cards, plus Venmo and PayPal Credit in the US, presenting options in a customizable stack of payment buttons. Fast, seamless, and flexible."
+msgstr "Accepter toutes les principales cartes de crédit et débit, ainsi que Venmo et PayPal Credit aux États-Unis, en présentant des options dans une pile personnalisable de boutons de paiement. Rapide, intégré et flexible."
 
 #: includes/class-wc-gateway-ppec-admin-handler.php:341
 msgid "PayPal Payout:"
@@ -47,8 +55,8 @@ msgstr "Personnaliser l’apparence de « PayPal Checkout » côté PayPal."
 msgid "PayPal Checkout Order Data Erased."
 msgstr "Données de commande PayPal effacées."
 
-#: includes/class-wc-gateway-ppec-privacy.php:12
 #: includes/abstracts/abstract-wc-gateway-ppec.php:18
+#: includes/class-wc-gateway-ppec-privacy.php:12
 msgid "PayPal Checkout"
 msgstr "PayPal Checkout"
 
@@ -191,10 +199,6 @@ msgstr "PayPal"
 #: includes/settings/settings-ppec.php:48
 msgid "This option is disabled. Currently PayPal Credit only available for U.S. merchants using USD currency."
 msgstr "Cette option est désactivée. À l'heure actuelle, PayPal Credit est uniquement disponible pour les marchands aux États-Unis en monnaie USD."
-
-#: includes/class-wc-gateway-ppec-plugin.php:238
-msgid "<p>PayPal&nbsp;Checkout with new <strong>Smart&nbsp;Payment&nbsp;Buttons™</strong> gives your customers the power to pay the way they want without leaving your site.</p><p>The <strong>existing buttons will be deprecated and removed</strong> in future releases. Upgrade to Smart&nbsp;Payment&nbsp;Buttons in the <a href=\"%s\">PayPal&nbsp;Checkout settings</a>.</p>"
-msgstr "<p>PayPal&nbsp;Checkout avec les nouveaux <strong>Smart&nbsp;Payment&nbsp;Buttons™</strong> donne aux clients la puissance de payer de la façon qu'ils souhaitent sans quitter votre site.</p><p>Les <strong>boutons existants seront rendus obsolètes et supprimés</strong> dans les prochaines versions. Mettre à niveau vers Smart&nbsp;Payment&nbsp;Buttons dans les <a href=\"%s\">réglages PayPal&nbsp;Checkout</a>.</p>"
 
 #: includes/class-wc-gateway-ppec-privacy.php:245
 msgid "PayPal Checkout Subscriptions Data Erased."
@@ -417,15 +421,15 @@ msgstr "Transaction PayPal en attente : %s"
 msgid "PayPal API error"
 msgstr "Erreur d’API PayPal"
 
-#: includes/class-wc-gateway-ppec-plugin.php:454
+#: includes/class-wc-gateway-ppec-plugin.php:438
 msgid "Docs"
 msgstr "Documentation"
 
-#: includes/class-wc-gateway-ppec-plugin.php:451
+#: includes/class-wc-gateway-ppec-plugin.php:435
 msgid "Settings"
 msgstr "Réglages"
 
-#: includes/class-wc-gateway-ppec-plugin.php:329
+#: includes/class-wc-gateway-ppec-plugin.php:313
 msgid "PayPal Checkout is almost ready. To get started, <a href=\"%s\">connect your PayPal account</a>."
 msgstr "PayPal Checkout est presque prêt. Pour commencer, <a href=\"%s\">connectez votre compte PayPal</a>."
 
@@ -450,10 +454,6 @@ msgstr "Créer un compte ?"
 #. Author URI of the plugin
 msgid "https://woocommerce.com"
 msgstr "https://woocommerce.com"
-
-#. Description of the plugin
-msgid "A payment gateway for PayPal Checkout (https://www.paypal.com/us/webapps/mpp/paypal-checkout)."
-msgstr "Une passerelle de paiement pour PayPal Express Checkout (https://www.paypal.com/fr/webapps/mpp/express-checkout)."
 
 #. Plugin URI of the plugin
 msgid "https://woocommerce.com/products/woocommerce-gateway-paypal-express-checkout/"
@@ -703,19 +703,19 @@ msgstr "Configurer ou lier un compte PayPal existant"
 msgid "PayPal Credit"
 msgstr "PayPal Credit"
 
-#: includes/class-wc-gateway-ppec-plugin.php:302
+#: includes/class-wc-gateway-ppec-plugin.php:286
 msgid "WooCommerce Gateway PayPal Checkout requires OpenSSL >= 1.0.1 to be installed on your server"
 msgstr "WooCommerce Gateway PayPal Checkout requiert l’installation de OpenSSL >= 1.0.1 sur votre serveur"
 
-#: includes/class-wc-gateway-ppec-plugin.php:299
+#: includes/class-wc-gateway-ppec-plugin.php:283
 msgid "WooCommerce Gateway PayPal Checkout requires cURL to be installed on your server"
 msgstr "WooCommerce Gateway PayPal Checkout requiert l’installation de cURL sur votre serveur"
 
-#: includes/class-wc-gateway-ppec-plugin.php:295
+#: includes/class-wc-gateway-ppec-plugin.php:279
 msgid "WooCommerce Gateway PayPal Checkout requires WooCommerce version 2.5 or greater"
 msgstr "WooCommerce Gateway PayPal Checkout requiert l’installation de WooCommerce >= 2.5"
 
-#: includes/class-wc-gateway-ppec-plugin.php:291
+#: includes/class-wc-gateway-ppec-plugin.php:275
 msgid "WooCommerce Gateway PayPal Checkout requires WooCommerce to be activated"
 msgstr "WooCommerce Gateway PayPal Checkout requiert l’activation de WooCommerce"
 
