@@ -741,6 +741,15 @@ class NewsletterControls {
             echo $minutes . ' minutes ';
         }
     }
+    
+    function password($name, $size = 20, $placeholder = '') {
+        $value = $this->get_value($name);
+        echo '<input id="options-', esc_attr($name), '" placeholder="' . esc_attr($placeholder) . '" name="options[' . $name . ']" type="password" autocomplete="off" ';
+        if (!empty($size)) {
+            echo 'size="' . $size . '" ';
+        }
+        echo 'value="', esc_attr($value), '">';
+    }    
 
     function text($name, $size = 20, $placeholder = '') {
         $value = $this->get_value($name);

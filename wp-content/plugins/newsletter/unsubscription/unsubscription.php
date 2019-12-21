@@ -96,7 +96,7 @@ class NewsletterUnsubscription extends NewsletterModule {
 
         $email = $this->get_email_from_request();
         if ($email) {
-            $wpdb->update(NEWSLETTER_USERS_TABLE, array('unsub_email_id' => (int) $email_id, 'unsub_time' => time()), array('id' => $user->id));
+            $wpdb->update(NEWSLETTER_USERS_TABLE, array('unsub_email_id' => (int) $email->id, 'unsub_time' => time()), array('id' => $user->id));
         }
 
         $this->send_unsubscribed_email($user);

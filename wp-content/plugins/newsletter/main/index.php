@@ -20,6 +20,7 @@ if ( $controls->is_action( 'feed_disable' ) ) {
 }
 
 $emails_module = NewsletterEmails::instance();
+$statistics_module = NewsletterStatistics::instance();
 $emails        = $wpdb->get_results( "select * from " . NEWSLETTER_EMAILS_TABLE . " where type='message' order by id desc limit 5" );
 
 $users_module = NewsletterUsers::instance();
@@ -33,9 +34,9 @@ $last_email = $wpdb->get_row(
 
 if ( $last_email ) {
 	$last_email_sent      = $last_email->sent;
-	$last_email_opened    = NewsletterStatistics::instance()->get_open_count( $last_email->id );
+	$last_email_opened    = $statistics_module->get_open_count( $last_email->id );
 	$last_email_notopened = $last_email_sent - $last_email_opened;
-	$last_email_clicked   = NewsletterStatistics::instance()->get_click_count( $last_email->id );
+	$last_email_clicked   = $statistics_module->get_click_count( $last_email->id );
 	$last_email_opened    -= $last_email_clicked;
 
 	$overall_sent = $wpdb->get_var( "select sum(sent) from " . NEWSLETTER_EMAILS_TABLE . " where type='message' and status in ('sent', 'sending')" );
@@ -302,16 +303,16 @@ $labels = array_reverse( $labels );
 												?>
                                             </td>
                                             <td>
-
-												<?php $emails_module->show_email_status_label( $email ) ?>
+                                                <?php $emails_module->show_email_status_label( $email ) ?>
                                             </td>
                                             <td>
 												<?php $emails_module->show_email_progress_bar( $email, array( 'scheduled' => true ) ) ?>
                                             </td>
-
-                                            <td style="white-space:nowrap">
-	                                            <?php echo $emails_module->get_edit_button($email) ?>
-                                            </td>
+                                            <td style="white-space:nowrap"><?php if ($email->status == 'sent') {
+		                                            echo '<a class="button-primary" href="' . $statistics_module->get_statistics_url($email->id) . '"><i class="fa fa-chart-bar"></i> ' . __('Statistics', 'newsletter') . '</a>';
+	                                            } else {
+		                                            echo $emails_module->get_edit_button($email);
+                                                } ?></td>
                                         </tr>
 									<?php } ?>
                                 </table>

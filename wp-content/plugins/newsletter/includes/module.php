@@ -2046,6 +2046,8 @@ class NewsletterModule {
                 $text = str_replace('{email_id}', $email->id, $text);
                 $text = str_replace('{email_key}', $nek, $text);
                 $text = str_replace('{email_subject}', $email->subject, $text);
+                // Deprecated
+                $text = str_replace('{subject}', $email->subject, $text);
                 $text = $this->replace_url($text, 'EMAIL_URL', $this->build_action_url('v', $user) . '&id=' . $email->id);
             }
 

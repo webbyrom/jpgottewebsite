@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-12-03 07:49:59+0000\n"
+"PO-Revision-Date: 2019-12-19 14:01:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5273,7 +5273,7 @@ msgstr "Autoriser les clients à créer un compte au cours de la validation de c
 
 #: includes/admin/settings/class-wc-settings-accounts.php:56
 msgid "Allow customers to log into an existing account during checkout"
-msgstr "Autorisez les clients à se connecter à un compte existant pendant le processus de paiement."
+msgstr "Autoriser les clients à se connecter à un compte existant pendant le processus de paiement"
 
 #: includes/admin/settings/class-wc-settings-accounts.php:47
 msgid "Allow customers to place orders without an account"
@@ -11260,11 +11260,11 @@ msgstr "Utilisez <code>[qty]</code> pour le nombre d&rsquo;articles,<br/><code>[
 
 #: includes/admin/settings/class-wc-settings-advanced.php:266
 msgid "Endpoint for the \"My account &rarr; Downloads\" page."
-msgstr "Point de terminaison pour la page « Mon compte > Téléchargements »."
+msgstr "Point de terminaison pour la page « Mon compte &rarr; Téléchargements »."
 
 #: includes/admin/settings/class-wc-settings-advanced.php:248
 msgid "Endpoint for the \"My account &rarr; Orders\" page."
-msgstr "Point de terminaison pour la page « Mon compte > Commandes »."
+msgstr "Point de terminaison pour la page « Mon compte &rarr; Commandes »."
 
 #. translators: 1: order number 2: order date 3: order status
 #: templates/order/tracking.php:30 templates/myaccount/view-order.php:28
@@ -14624,7 +14624,7 @@ msgstr "Définir un moyen de paiement par défaut"
 
 #: includes/admin/settings/class-wc-settings-advanced.php:218
 msgid "Endpoint for the delete payment method page."
-msgstr "Terminaison pour la page de suppression d&rsquo;un moyen de paiement."
+msgstr "Terminaison pour la page de suppression d’un moyen de paiement."
 
 #: includes/admin/settings/class-wc-settings-advanced.php:217
 msgid "Delete payment method"
@@ -14632,7 +14632,7 @@ msgstr "Supprimer un moyen de paiement"
 
 #: includes/admin/settings/class-wc-settings-advanced.php:293
 msgid "Endpoint for the \"My account &rarr; Payment methods\" page."
-msgstr "Point de terminaison pour la page « Mon compte > Moyens de paiement »."
+msgstr "Point de terminaison pour la page « Mon compte &rarr; Moyens de paiement »."
 
 #: includes/admin/settings/class-wc-settings-advanced.php:292
 #: includes/admin/settings/class-wc-settings-payment-gateways.php:37
@@ -16375,7 +16375,7 @@ msgstr "Type de requête"
 #: packages/woocommerce-blocks/build/product-categories.js:1
 #: packages/woocommerce-blocks/assets/js/blocks/product-categories/edit.js:69
 msgid "Dropdown"
-msgstr "Déroulante"
+msgstr "Liste déroulante"
 
 #: includes/widgets/class-wc-widget-layered-nav.php:88
 #: packages/woocommerce-blocks/build/product-categories.js:1
@@ -20776,7 +20776,7 @@ msgstr "Déconnexion"
 
 #: includes/admin/settings/class-wc-settings-advanced.php:302
 msgid "Endpoint for the \"My account &rarr; Lost password\" page."
-msgstr "Point de terminaison pour la page « Mon compte \t Mot de passe perdu »."
+msgstr "Point de terminaison pour la page « Mon compte &rarr; Mot de passe perdu »."
 
 #: includes/admin/class-wc-admin-menus.php:317
 #: includes/admin/settings/class-wc-settings-advanced.php:301
@@ -20787,11 +20787,11 @@ msgstr "Mot de passe perdu"
 
 #: includes/admin/settings/class-wc-settings-advanced.php:284
 msgid "Endpoint for the \"My account &rarr; Addresses\" page."
-msgstr "Point de terminaison pour la page « Mon compte \t Adresses »."
+msgstr "Point de terminaison pour la page « Mon compte &rarr; Adresses »."
 
 #: includes/admin/settings/class-wc-settings-advanced.php:275
 msgid "Endpoint for the \"My account &rarr; Edit account\" page."
-msgstr "Point de terminaison pour la page « Mon compte \t Modifier compte »."
+msgstr "Point de terminaison pour la page « Mon compte &rarr; Modifier compte »."
 
 #: includes/admin/settings/class-wc-settings-advanced.php:274
 msgid "Edit account"
@@ -21931,7 +21931,7 @@ msgstr "État du stock"
 #: includes/admin/meta-boxes/views/html-product-data-inventory.php:70
 #: includes/admin/meta-boxes/views/html-variation-admin.php:208
 msgid "If managing stock, this controls whether or not backorders are allowed. If enabled, stock quantity can go below 0."
-msgstr "En cas de gestion de stock, cela défini si les ruptures de stock sont autorisées ou non. Si actif, la quantité de stock peut être inférieure à 0."
+msgstr "En cas de gestion de stock, cela définit si les ruptures de stock sont autorisées ou non. Si actif, la quantité de stock peut être inférieure à 0."
 
 #: includes/wc-product-functions.php:830
 msgid "Allow, but notify customer"

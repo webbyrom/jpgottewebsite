@@ -103,7 +103,7 @@ if (empty($controls->data['enabled']) && !empty($controls->data['host'])) {
                 <th>Authentication</th>
                 <td>
                     user: <?php $controls->text('user', 30); ?>
-                    password: <?php $controls->text('pass', 30); ?>
+                    password: <?php $controls->password('pass', 30); ?>
                     <p class="description">
                         If authentication is not required, leave "user" field blank.
                     </p>

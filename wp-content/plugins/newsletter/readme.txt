@@ -1,8 +1,8 @@
 === Newsletter ===
 Tags: email, email marketing, newsletter, newsletter subscribers, welcome email, signup forms, contact, lead generation, popup, marketing automation
 Requires at least: 3.4.0
-Tested up to: 5.2.4
-Stable tag: 6.4.0
+Tested up to: 5.3.2
+Stable tag: 6.4.1
 Requires PHP: 5.6
 Contributors: satollo,webagile,michael-travan
 
@@ -108,6 +108,15 @@ Thank you, The Newsletter Team
 3. The Reports extension
 
 == Changelog ==
+
+= 6.4.1 =
+
+* Added statistics shortcut for sent newsletters
+* Fixed unsubscription from email tracking
+* Password field in smtp configuration
+* Small fixes to header block
+* Fixed the subject on online newsletter view
+* Fixed the subject ideas popup X button
 
 = 6.4.0 =
 
